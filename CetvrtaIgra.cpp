@@ -1,4 +1,4 @@
-#include "IGRICA4.h"
+#include "CetvrtaIgra.h"
 #include <vector>
 #include <time.h>
 #include <fstream>

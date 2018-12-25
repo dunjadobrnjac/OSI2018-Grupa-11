@@ -1,4 +1,4 @@
-﻿#include "Header.h"
+﻿#include "TrecaIgra.h"
 
 int isTheSame(int niz[], int broj)
 {
