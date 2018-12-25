@@ -1,0 +1,12 @@
+AUTO imenica
+SKOLA imenica
+POGODAK imenica
+STOLICA imenica
+PROJEKTOR imenica
+INTERVENCIJA imenica
+PROJEKAT imenica
+INTERFEJS imenica
+PRELIJEPO pridjev
+ODUSEVITI glagol
+RAZMIJENITI glagol
+STUDIRATI glagol
