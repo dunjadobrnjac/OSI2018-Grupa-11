@@ -9,26 +9,14 @@
 #include "DrugaIgra.h"
 #include <cstdlib>
 #include <cstdio>
-#define BP 15 // broj pitanja ovdje promjeniti ako se stave nova
+#define BP 5 // broj pitanja ovdje promjeniti ako se stave nova
 
 struct Pitanje
 {
 	std::string pitanja;
 	std::string tacanOdgovor;
 };
-/*void UcitajTacneOdgovore(char niz[])
-{
-	std::ifstream Odg;
-	Odg.open("odgovori.txt");
-	if (Odg.is_open())
-	{
-		for (int i = 0; i < 15; i++)
-		{
-			Odg >> niz[i];
-		}
-		Odg.close();
-	}
-}*/
+
 void ucitajPitanja(Pitanje nizPitanja[])
 {
 	std::ifstream pt;
@@ -44,7 +32,6 @@ void ucitajPitanja(Pitanje nizPitanja[])
 				std::getline(pt, line);
 				nizPitanja[i].pitanja += line;
 				nizPitanja[i].pitanja += '\n';
-				//strcat(nizPitanja[i].pitanja, line);
 			}
 			std::getline(pt, line);
 			nizPitanja[i].tacanOdgovor += line;
@@ -52,22 +39,7 @@ void ucitajPitanja(Pitanje nizPitanja[])
 		pt.close();
 	}
 }
-/*int RandomPitanje(int cuvar[])
-{
-	std::random_device randomGenerator;
-	int index =abs((int)randomGenerator() % 14);
-	int brojac = 0;
-	for (int i = 0; i < 15; i++)
-	{
-		if (index == cuvar[i])
-			brojac++;
-	}
-	if (brojac == 0)
-		return index;
-	else
-		return RandomPitanje(int cuvar[]);
-}
-*/
+
 void RandomPitanjee(int cuvar[])
 {
 	int list[BP];
@@ -84,22 +56,19 @@ void RandomPitanjee(int cuvar[])
 		cuvar[i] = list[i];
 	}
 }
-void igrica2(int& bodovi)
+void igrajDruguIgru(int& bodovi)
 {
 	srand(time(NULL));
 	std::string odgovor;
-	//int bodovi = 0;
-	//char niz[15];
+
 	int cuvar[BP];
 	Pitanje nizPitanja[BP];
-	//UcitajTacneOdgovore(niz);
+	
 	ucitajPitanja(nizPitanja);
 	RandomPitanjee(cuvar);
-	//for (int i = 0; i < 15; i++)
-		//std::cout << niz[i] ;
+
 	for (int i = 0; i < BP; i++)
 	{
-		//std::cout << nizPitanja[cuvar[i]].pitanja << std::endl;
 		do
 		{
 			std::cout << nizPitanja[cuvar[i]].pitanja << std::endl;
@@ -113,14 +82,4 @@ void igrica2(int& bodovi)
 		else if (odgovor != nizPitanja[cuvar[i]].tacanOdgovor)
 			bodovi -= 30;
 	}
-	std::cout << "Broj bodova je " << bodovi;
-	//getchar();
-}
-int main()
-{
-	SetConsoleOutputCP(CP_UTF8);
-	setvbuf(stdout, nullptr, _IOFBF, 1000); // Omogucen unos è, æ, ž,š ,ð
-	int a = 1000;
-	igrica2(a);
-	getchar();
 }
