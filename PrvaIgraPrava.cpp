@@ -1,6 +1,6 @@
 ﻿#include "PrvaIgra.h"
 
-int prvaIgraPrava(int& brojIgranja)
+int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi)
 {
 	int odluka;
 	while (true)
@@ -93,14 +93,13 @@ int prvaIgraPrava(int& brojIgranja)
 		if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("nE") == 0 || odgovor.compare("NE") == 0)
 		{
 			std::cout << " Hvala na igranju!" << std::endl;
-			std::cout << u8" Vaš trenutni broj bodova je : " << osvojeniBodovi << std::endl;
 			odluka = 0;
-
 			break;
 		}
 		else
 			std::cout << "\n\n";
 		brojIgranja++;
+		system("cls");
 	}
 	return odluka;
 }
