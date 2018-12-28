@@ -8,7 +8,6 @@
 #include <Windows.h>
 
 
-static int osvojeniBodovi = 10;
-void igrajPrvuIgru();
-int prvaIgraPrava(int &brojIgranja);
-int prvaIgraVaranje(int &brojIgranja);
+void igrajPrvuIgru(int&);
+int prvaIgraPrava(int &, int&);
+int prvaIgraVaranje(int &,int&);
