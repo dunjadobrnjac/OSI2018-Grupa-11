@@ -71,7 +71,7 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 		red.open("redKljucevaPoTrajanjima.txt");
 		int r[4];
 		red >> r[0] >> r[1] >> r[2] >> r[3];
-		for(int j=0;j<=i;j++)
+		for(int j=0;j<=r[i];j++)
 		 kljucevi >> s;
 		r[i]++;
 		red.close();
@@ -79,8 +79,8 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 		red1.open("redKljucevaPoTrajanjima.txt"); red1 << r[0] << "\n" << r[1] << "\n" << r[2] << "\n" << r[3];
 		red1.close();
 		std::cout << s;
-		std::cout << std::endl << "Zapisite na papir da ne biste zaboravili,imate 12s !" << std::endl;
-		Sleep(12000);
+		std::cout << std::endl << "Zapisite na papir da ne biste zaboravili,imate 15s !" << std::endl;
+		Sleep(15000);
 		//system("pause");
 	}
 	system("cls");
