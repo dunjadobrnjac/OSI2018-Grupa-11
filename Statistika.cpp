@@ -153,3 +153,16 @@ void statistika(int bodovi, int brojIgre)
 	PisiUStatistiku(niz);
 	PisiUCSVFajl(niz);
 }
+void upisiUDat(int igra, int bodovi)
+{
+	std::ofstream Pisi;
+	Pisi.open("Statistika.txt");
+	if (Pisi.is_open())
+	{
+		std::string datum = Vrijeme();
+		Pisi << igra << "\n";
+		Pisi << datum << "\n";
+		Pisi << bodovi << "\n";
+		Pisi.close();
+	}
+}
