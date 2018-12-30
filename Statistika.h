@@ -8,7 +8,7 @@ void UmetniTrenutneBodove(int, struct Stats, int);
 void PisiUCSVFajl(struct Stats);
 void BubbleSort(struct Stats, int);
 std::string Vrijeme(void);
-
+void upisiUDat(int, int);
 
 struct Stats {
 	int brojIgre;
