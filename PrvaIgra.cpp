@@ -15,7 +15,7 @@ void igrajPrvuIgru(int& bodovi)
 	{
 		std::ifstream input("brojigranja.txt");
 		input >> brojIgranja;
-		std::cout << brojIgranja << std::endl; //ispisuje na izlaz broj igranja
+		
 		if (brojIgranja < 3)
 		{
 			if (prvaIgraVaranje(brojIgranja,bodovi) == 0)
@@ -30,5 +30,4 @@ void igrajPrvuIgru(int& bodovi)
 		output << brojIgranja;
 	}
 
-	std::cout << brojIgranja << std::endl; //ispisuje na izlaz broj igranja
 }
