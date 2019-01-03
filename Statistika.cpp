@@ -15,7 +15,16 @@ std::string Vrijeme()
 	Temp.open("Temp.txt");
 	if (Temp.is_open())
 	{
-		Temp << time.wDay << "." << time.wMonth << "." << time.wYear << ".   " << time.wHour << ":" << time.wMinute << ":" << time.wSecond;
+		if (time.wDay < 10)Temp << "0";
+		Temp << time.wDay << ".";
+		if (time.wMonth < 10)Temp << "0";
+		Temp << time.wMonth << "." << time.wYear << ".   ";
+		if (time.wHour < 10)Temp << "0";
+		Temp << time.wHour << ":";
+		if (time.wMinute < 10)Temp << "0";
+		Temp << time.wMinute << ":";
+		if (time.wSecond < 10)Temp << "0";
+		Temp << time.wSecond;
 		Temp.close();
 	}
 	std::ifstream Tmp;
@@ -28,7 +37,7 @@ std::string Vrijeme()
 	return TrenutniDatum;
 
 }
-void BubbleSort(Stats niz[], int n)
+void SelectionSort(Stats niz[], int n)
 {
 	int i, j;
 	for (i = 0; i < n - 1; i++)
@@ -67,11 +76,10 @@ void PisiUCSVFajl(Stats niz[])
 void UmetniTrenutneBodove(int bod, Stats niz[], int brojIgre)
 {
 	bool k = true;
-	int i;
+	int i = 9;
 	k = 1;
 	while (k)
 	{
-		i = 9;
 		if (niz[i].brojIgre == brojIgre)
 		{
 			if (niz[i].brojBodova < bod)
@@ -81,16 +89,15 @@ void UmetniTrenutneBodove(int bod, Stats niz[], int brojIgre)
 				niz[i].datum = Vrijeme();
 				k = false;
 			}
-			if (i == 0)
-				k = false;
 		}
+		if (i == 0)
+			k = false;
 		i--;
 	}
 }
 void PisiUStatistiku(Stats niz[])
 {
-	std::ofstream Pisi;
-	Pisi.open("Statistika.txt");
+	std::ofstream Pisi("Statistika.txt",std::ios_base::app);
 	if (Pisi.is_open())
 	{
 		for (int i = 1; i < 5; i++)
@@ -116,7 +123,7 @@ void IspisiStatistiku(Stats niz[])
 		{
 			if (niz[j].brojIgre == i)
 			{
-				std::cout<<"\n" << niz[j].brojIgre << ". Igra: " << niz[j].datum << " ----- " << niz[j].brojBodova << std::endl;
+				std::cout << "\n" << niz[j].brojIgre << ". Igra: " << niz[j].datum << " ----- " << niz[j].brojBodova << std::endl;
 
 			}
 		}
@@ -127,11 +134,13 @@ void statistika(int bodovi, int brojIgre)
 
 	Stats niz[10];
 	std::ifstream MyDat;
-	Vrijeme();
+	std::string vr=Vrijeme();
+	upisiUDat(brojIgre,bodovi,vr);
 	MyDat.open("Statistika.txt");
 	if (MyDat.is_open())
 	{
 		for (int i = 0; i < 10; i++)
+			if (MyDat.good())
 		{
 			std::string data;
 			std::getline(MyDat, data);
@@ -142,27 +151,31 @@ void statistika(int bodovi, int brojIgre)
 			std::getline(MyDat, data2);
 			std::istringstream iss2(data2);
 			iss2 >> niz[i].brojBodova;
-			std::cout << niz[i].brojIgre << std::endl << niz[i].datum << std::endl << niz[i].brojBodova;
+			//std::cout << niz[i].brojIgre << std::endl << niz[i].datum << std::endl << niz[i].brojBodova;
+			if (!MyDat.good())
+				break;
 		}
 		MyDat.close();
 	}
 	BubbleSort(niz, 10);
-	//UmetniTrenutneBodove(bodovi, niz, brojIgre); // POZVATI AKO JE STATISTIKA PUNA MIJENJA NAJMANJI BROJ BODOVA ZA DATU IGRU
+	int j;
+	for (j = 0; j < 10 && vr != niz[j].datum; j++);
+	if (j == 10)
+	UmetniTrenutneBodove(bodovi, niz, brojIgre); // POZVATI AKO JE STATISTIKA PUNA MIJENJA NAJMANJI BROJ BODOVA ZA DATU IGRU
 	BubbleSort(niz, 10);
 	IspisiStatistiku(niz);
 	PisiUStatistiku(niz);
 	PisiUCSVFajl(niz);
 }
-void upisiUDat(int igra, int bodovi)
+void upisiUDat(int igra,int bodovi,std::string vr)
 {
-	std::ofstream Pisi;
-	Pisi.open("Statistika.txt");
+	Stats s = { igra,vr,bodovi };
+	std::ofstream Pisi("Statistika.txt", std::ios_base::app);
 	if (Pisi.is_open())
 	{
-		std::string datum = Vrijeme();
-		Pisi << igra << "\n";
-		Pisi << datum << "\n";
-		Pisi << bodovi << "\n";
+		Pisi << s.brojIgre << "\n";
+		Pisi << s.datum << "\n";
+		Pisi << s.brojBodova << "\n";
 		Pisi.close();
 	}
 }
