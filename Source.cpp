@@ -1,3 +1,4 @@
+#include "Korisnik.h"
 #include "PrvaIgra.h"
 #include "DrugaIgra.h"
 #include "TrecaIgra.h"
@@ -16,33 +17,92 @@ int main()
 	setvbuf(stdout, nullptr, _IOFBF, 1000);
 
 	std::cout << u8"BringITon platforma za igre\n" << std::endl;
-	int brojIgre;
-	while (true)
+
+	Korisnik k;
+	if (k.getBrUlaza() == 0)
 	{
-		std::cout << u8"Pogaðanje sluèajnog broja--> 1 " << std::endl;
-		std::cout << u8"Kviz --> 2 " << std::endl;
-		std::cout << u8"Loto --> 3 " << std::endl;
-		std::cout << u8"Vješala --> 4 " << std::endl;
-		std::cout << u8"Unesite odgovarajuæi broj za igru koju želite da igrate : ";
-		std::cin >> brojIgre;
+		std::cin >> k;
+		std::cout << k;
+		std::cout << u8"Omoguæeno je igranje samo prve igre ." << std::endl;
+		std::cout << u8"Da li želite da igrate prvu igru --> Pogaðanje sluèajnog broja ? (da/ne)" << std::endl;
+		std::string odgovor;
+		std::cin >> odgovor;
 		system("cls");
-		if (brojIgre == 1)
-			igrajPrvuIgru(ukupanBrojBodovaZaSveIgre);
-		else if (brojIgre == 2)
-			igrajDruguIgru(ukupanBrojBodovaZaSveIgre);
-		else if (brojIgre == 3)
+		if (odgovor.compare("da") == 0)
 		{
-			int pomocna=0;
-			LOTO loto;
-			lotoIgra(&pomocna, &ukupanBrojBodovaZaSveIgre, &loto);
-		}
-		else if (brojIgre == 4)
-			vjesala(ukupanBrojBodovaZaSveIgre);
-			
+			k.ucitajKljuc();
+				igrajPrvuIgru(ukupanBrojBodovaZaSveIgre);
+		} // ovo ne radi kako treba 
 		else
-			std::cout << "Niste unijeli validan broj " << std::endl;
-		std::cout << u8"\nVaš ukupan broj bodova je : " << ukupanBrojBodovaZaSveIgre << "\n";
+			if(odgovor.compare("ne")==0)
+				return 0;
+		//treba dodati i ingnore kao u prvoj igri 
 		system("cls");
+	}
+	else
+	{
+		int brojIgre;
+		while (true)
+		{
+			std::cout << "Pozdrav " << k.getIme() << "!" << std::endl;
+			k.ucitajBodove();
+			k.ispisiBodove();
+			std::cout << u8"\nPogaðanje sluèajnog broja--> 1 " << std::endl;
+			std::cout << u8"Kviz --> 2 " << std::endl;
+			std::cout << u8"Loto --> 3 " << std::endl;
+			std::cout << u8"Vješala --> 4 \n" << std::endl;
+			std::cout << u8"Unesite odgovarajuæi broj za igru koju želite da igrate : ";
+			std::cin >> brojIgre;
+			system("cls");
+			if (brojIgre == 1)
+			{
+				if (k.provjeraKljuca(1))
+					igrajPrvuIgru(ukupanBrojBodovaZaSveIgre);
+				else
+				{
+					k.ucitajKljuc();
+					igrajPrvuIgru(ukupanBrojBodovaZaSveIgre);
+				}
+		
+			}
+			else if (brojIgre == 2)
+			{
+				if (k.provjeraKljuca(2))
+					igrajDruguIgru(ukupanBrojBodovaZaSveIgre);
+				else
+				{
+					k.ucitajKljuc();
+					igrajDruguIgru(ukupanBrojBodovaZaSveIgre);
+				}
+			}
+			else if (brojIgre == 3)
+			{
+				int pomocna = 0;
+				LOTO loto;
+				if(k.provjeraKljuca(3))
+					lotoIgra(&pomocna, &ukupanBrojBodovaZaSveIgre, &loto);
+				else
+				{
+					k.ucitajKljuc();
+					lotoIgra(&pomocna, &ukupanBrojBodovaZaSveIgre, &loto);
+				}
+			}
+			else if (brojIgre == 4)
+			{
+				if (k.provjeraKljuca(4))
+					vjesala(ukupanBrojBodovaZaSveIgre);
+				else
+				{
+					k.ucitajKljuc();
+					vjesala(ukupanBrojBodovaZaSveIgre);
+				}
+			}
+
+			else
+				std::cout << "Niste unijeli validan broj " << std::endl;
+			std::cout << u8"\nVaš ukupan broj bodova je : " << ukupanBrojBodovaZaSveIgre << "\n";
+			system("cls");
+		}
 	}
 	system("pause"); // omogucava da prozor ostane otvoren
 	return 0;
