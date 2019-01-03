@@ -18,7 +18,7 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 
 		srand(time(0));
 		int random = rand() % 101; // izabere random broj od 0 do 100 ( ako napises samo %100 onda je od 0 do 99)
-		int varalica = rand() % 5 + 1; // pomocni broj pokusaja na koojem ce pogoditi broj
+		int varalica = rand() % 3 + 3; // pomocni broj pokusaja na koojem ce pogoditi broj
 		int broj;
 		int indeks = 0;
 		int brojPokusaja = 0;
@@ -27,7 +27,7 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 
 		int* nizUnesenih = new int[5];
 
-		std::cout << random << " " << varalica << std::endl;
+		//std::cout << random << " " << varalica << std::endl;
 
 		do
 		{
