@@ -150,7 +150,7 @@ string ucitajTip(string putanja, string rijec)
 	}
 	return tip1;
 }
-void vjesala(int& bodovi)
+void vjesala(int& bodovi, Korisnik k)
 {
 	srand(time(0));//da bi se trazena rijec uvijek nasumicno nasla
 	string rijecZaPogoditi;
@@ -210,6 +210,8 @@ void vjesala(int& bodovi)
 		Pisi(rijecZaPogoditi);
 		bodovi -= 20;
 	}
+	k.brojBodova = bodovi;
+	k.upisiBodove();
 
 	getchar();
 }

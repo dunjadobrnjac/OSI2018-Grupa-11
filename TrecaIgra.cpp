@@ -59,7 +59,7 @@ void sortirajNiz(int *niz, int n)
 	}
 }
 
-void ispisiRezultat(int loto[], int odigrani[], int broj)
+void ispisiRezultat(int loto[], int odigrani[], int broj, Korisnik k)
 {
 	std::cout << u8"Odigrali ste sledeću kombinaciju" << std::endl;
 	sortirajNiz(odigrani, 7);
@@ -85,25 +85,26 @@ void ispisiRezultat(int loto[], int odigrani[], int broj)
 	std::cout << std::endl;
 	int osvojeniBodoviRezultat = sumaBodova(broj);
 	std::cout << u8"Pogodili ste ukupno " << broj << u8" broj" << ((broj > 0) ? ((broj > 1) ? ((broj > 4) ? u8"eva" : u8"a") : u8"") : u8"eva") << u8" i osvojili ste " << osvojeniBodoviRezultat << u8" bodova" << std::endl;
+
+	k.brojBodova += osvojeniBodoviRezultat;
+	k.upisiBodove();
 }
 
-void lotoIgra(int* brojUlozenihBodova, static  int* trenutniBrojBodova, LOTO* loto)
+void lotoIgra(int* brojUlozenihBodova, int* trenutniBrojBodova, LOTO* loto, Korisnik k)
 {
 	//Zbog opsega nmg brojacu pristupiti van petlje
 	srand(time(NULL));	//Zbog f-je random
+pocetak:
 	loto = new LOTO;	//alokacije memorije za loto
 	int pom = 0;	//Pomocni int, sluzi da preuzme broj random f-je, prije nego sto ga smjesti u lotoBrojevi
 	int p = 3;
 	bool pom1 = false;	//Sluzi da prihvati rezultat f-je za varanje
-	std::cout << u8"==========================================================================================="<<std::endl;
-	std::cout << u8" TREĆA IGRA    TREĆA IGRA   TREĆA IGRA    TREĆA IGRA   TREĆA IGRA   TREĆA IGRA  TREĆA IGRA " << std::endl;
-	std::cout << u8"===========================================================================================" << std::endl;
-	std::cout << u8"Unesite 7 različitih brojeva" << std::endl;
+	std::cout << u8"Unesite 7 razlicitih brojeva u opsegu od 1 do 45:" << std::endl;
 	for (int i = 0; i < 7; i++)
 	{
 		loto->odigraniBrojevi[i] = 0;
 	}
-	for (int i = 0;i < 7;i++)
+	for (int i = 0; i < 7; i++)
 	{
 		bool p = false;//U nju smjestam rezultat izvrsavanja isTheSame f-je
 		do
@@ -122,7 +123,7 @@ void lotoIgra(int* brojUlozenihBodova, static  int* trenutniBrojBodova, LOTO* lo
 			}
 			p = (pom > 45) || (pom < 0) || isTheSame(loto->odigraniBrojevi, pom);
 			if (p && (pom > 0 && pom < 45))
-				std::wcout << u8"***GREŠKA***    Dati broj je isti kao i " << isTheSame(loto->odigraniBrojevi, pom) << u8". broj pa morate unijeti " << i + 1 << u8". broj ponovo" << std::endl;
+				std::cout << u8"***GREŠKA***    Dati broj je isti kao i " << isTheSame(loto->odigraniBrojevi, pom) << u8". broj pa morate unijeti " << i + 1 << u8". broj ponovo" << std::endl;
 		} while (p && (pom > 0 && pom < 45));
 		if (!p)
 		{
@@ -136,7 +137,7 @@ void lotoIgra(int* brojUlozenihBodova, static  int* trenutniBrojBodova, LOTO* lo
 				std::cout << u8"***GREŠKA***    Uneseni broj je veci od 45, pa morate unijeti drugi broj umjesto ovog" << std::endl;
 			i--;
 		}
-		
+
 	}
 	int b = 3;
 	int brojac = 0;
@@ -153,6 +154,13 @@ void lotoIgra(int* brojUlozenihBodova, static  int* trenutniBrojBodova, LOTO* lo
 		loto->lotoBrojevi[i] = pom;
 	}
 	int brojPogodaka = brojPogodakaFunkcija(loto->lotoBrojevi, loto->odigraniBrojevi);
-	ispisiRezultat(loto->lotoBrojevi, loto->odigraniBrojevi, brojac);
-	getchar();
+	ispisiRezultat(loto->lotoBrojevi, loto->odigraniBrojevi, brojac,k);
+	bool a = false;
+	std::cout << u8"Da li želite opet igrati? (1/0)";
+	std::cin >> a;
+	if (a)
+	{
+		system("cls");
+		goto pocetak;
+	}
 }

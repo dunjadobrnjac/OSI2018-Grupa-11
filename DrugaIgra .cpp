@@ -9,7 +9,7 @@
 #include "DrugaIgra.h"
 #include <cstdlib>
 #include <cstdio>
-#define BP 5 // broj pitanja ovdje promjeniti ako se stave nova
+#define BP 15 // broj pitanja ovdje promjeniti ako se stave nova
 
 struct Pitanje
 {
@@ -56,7 +56,7 @@ void RandomPitanjee(int cuvar[])
 		cuvar[i] = list[i];
 	}
 }
-void igrajDruguIgru(int& bodovi)
+void igrajDruguIgru(int& bodovi,Korisnik k)
 {
 	srand(time(NULL));
 	std::string odgovor;
@@ -82,4 +82,6 @@ void igrajDruguIgru(int& bodovi)
 		else if (odgovor != nizPitanja[cuvar[i]].tacanOdgovor)
 			bodovi -= 30;
 	}
+	k.brojBodova = bodovi;
+	k.upisiBodove();
 }

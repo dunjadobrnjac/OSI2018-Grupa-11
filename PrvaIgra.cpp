@@ -8,14 +8,13 @@
 #include <Windows.h>
 int brojIgranja;
 
-void igrajPrvuIgru(int& bodovi)
+void igrajPrvuIgru(int& bodovi, Korisnik k)
 {
 	
 	while (true)
 	{
 		std::ifstream input("brojigranja.txt");
 		input >> brojIgranja;
-		
 		if (brojIgranja < 3)
 		{
 			if (prvaIgraVaranje(brojIgranja,bodovi) == 0)
@@ -29,5 +28,7 @@ void igrajPrvuIgru(int& bodovi)
 		std::ofstream output("brojigranja.txt");
 		output << brojIgranja;
 	}
+	k.brojBodova = bodovi;
+	k.upisiBodove();
 
 }
