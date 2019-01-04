@@ -96,8 +96,6 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi)
 			odluka = 0;
 			break;
 		}
-		else
-			std::cout << "\n\n";
 		brojIgranja++;
 		system("cls");
 	}

@@ -27,7 +27,7 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 
 		int* nizUnesenih = new int[5];
 
-		//std::cout << random << " " << varalica << std::endl;
+		std::cout << random << " " << varalica << std::endl;
 
 		do
 		{
@@ -113,8 +113,6 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 
 			break;
 		}
-		else
-			std::cout << "\n\n";
 		brojIgranja++;
 		system("cls");
 	}
