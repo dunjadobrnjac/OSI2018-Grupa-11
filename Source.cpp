@@ -3,11 +3,11 @@
 #include "DrugaIgra.h"
 #include "TrecaIgra.h"
 #include "CetvrtaIgra.h"
+#include "Statistika.h"
 #include <iostream>
 #include <cstdio>
 #include <Windows.h>
 
-static int ukupanBrojBodovaZaSveIgre=10;
 
 int main()
 {
@@ -16,93 +16,121 @@ int main()
 	// Enable buffering to prevent VS from chopping up UTF-8 byte sequences
 	setvbuf(stdout, nullptr, _IOFBF, 1000);
 
-	std::cout << u8"BringITon platforma za igre\n" << std::endl;
+	std::cout << "BringITon platforma za igre\n" << std::endl;
 
 	Korisnik k;
+	k.ucitajBodove();
+
 	if (k.getBrUlaza() == 0)
 	{
 		std::cin >> k;
 		std::cout << k;
 		std::cout << u8"Omoguæeno je igranje samo prve igre ." << std::endl;
-		std::cout << u8"Da li želite da igrate prvu igru --> Pogaðanje sluèajnog broja ? (da/ne)" << std::endl;
+		std::cout << u8"Da li želite da igrate prvu igru --> Pogaðanje sluèajnog broja ? (Da/Ne)" << std::endl;
 		std::string odgovor;
-		std::cin >> odgovor;
-		system("cls");
-		if (odgovor.compare("da") == 0)
+		while (true) 
 		{
-			k.ucitajKljuc();
-				igrajPrvuIgru(ukupanBrojBodovaZaSveIgre);
-		} // ovo ne radi kako treba 
+			std::cin >> odgovor;
+
+			if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0
+				|| odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+				break;
+			else
+				std::cout << " Unesite 'Da' ili 'Ne'...\n";
+		}
+
+		system("cls");
+		if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+		{
+			k.ucitajKljuc(1);
+			igrajPrvuIgru(k.brojBodova,k);
+			statistika(k.brojBodova, 1, true);
+		}
 		else
-			if(odgovor.compare("ne")==0)
+			if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0)
 				return 0;
-		//treba dodati i ingnore kao u prvoj igri 
+
 		system("cls");
 	}
 	else
 	{
-		int brojIgre;
-		while (true)
-		{
-			std::cout << "Pozdrav " << k.getIme() << "!" << std::endl;
-			k.ucitajBodove();
-			k.ispisiBodove();
-			std::cout << u8"\nPogaðanje sluèajnog broja--> 1 " << std::endl;
-			std::cout << u8"Kviz --> 2 " << std::endl;
-			std::cout << u8"Loto --> 3 " << std::endl;
-			std::cout << u8"Vješala --> 4 \n" << std::endl;
-			std::cout << u8"Unesite odgovarajuæi broj za igru koju želite da igrate : ";
-			std::cin >> brojIgre;
-			system("cls");
-			if (brojIgre == 1)
-			{
-				if (k.provjeraKljuca(1))
-					igrajPrvuIgru(ukupanBrojBodovaZaSveIgre);
-				else
-				{
-					k.ucitajKljuc();
-					igrajPrvuIgru(ukupanBrojBodovaZaSveIgre);
-				}
-		
-			}
-			else if (brojIgre == 2)
-			{
-				if (k.provjeraKljuca(2))
-					igrajDruguIgru(ukupanBrojBodovaZaSveIgre);
-				else
-				{
-					k.ucitajKljuc();
-					igrajDruguIgru(ukupanBrojBodovaZaSveIgre);
-				}
-			}
-			else if (brojIgre == 3)
-			{
-				int pomocna = 0;
-				LOTO loto;
-				if(k.provjeraKljuca(3))
-					lotoIgra(&pomocna, &ukupanBrojBodovaZaSveIgre, &loto);
-				else
-				{
-					k.ucitajKljuc();
-					lotoIgra(&pomocna, &ukupanBrojBodovaZaSveIgre, &loto);
-				}
-			}
-			else if (brojIgre == 4)
-			{
-				if (k.provjeraKljuca(4))
-					vjesala(ukupanBrojBodovaZaSveIgre);
-				else
-				{
-					k.ucitajKljuc();
-					vjesala(ukupanBrojBodovaZaSveIgre);
-				}
-			}
+		std::cout << "Pozdrav " << k.getIme() << "!" << std::endl;
+	}
 
+
+
+	int brojIgre;
+	while (true)
+	{
+		k.ucitajBodove();
+		k.ispisiBodove();
+		std::cout << u8"\nPogaðanje sluèajnog broja--> 1 " << std::endl;
+		std::cout << "Kviz --> 2 " << std::endl;
+		std::cout << "Loto --> 3 " << std::endl;
+		std::cout << u8"Vješala --> 4" << std::endl;
+		std::cout << "Prikaz statistike --> 5\n" << std::endl;
+		std::cout << u8"Unesite odgovarajuæi broj : ";
+		std::cin >> brojIgre;
+		system("cls");
+		if (brojIgre == 1)
+		{
+			if (k.provjeraKljuca(1))
+				igrajPrvuIgru(k.brojBodova,k);
 			else
-				std::cout << "Niste unijeli validan broj " << std::endl;
-			std::cout << u8"\nVaš ukupan broj bodova je : " << ukupanBrojBodovaZaSveIgre << "\n";
-			system("cls");
+			{
+				k.ucitajKljuc(1);
+				igrajPrvuIgru(k.brojBodova,k);
+			}
+			statistika(k.brojBodova, 1, true);
+
 		}
+		else if (brojIgre == 2)
+		{
+			if (k.provjeraKljuca(2))
+				igrajDruguIgru(k.brojBodova,k);
+			else
+			{
+				k.ucitajKljuc(2);
+				igrajDruguIgru(k.brojBodova,k);
+			}
+			statistika(k.brojBodova, 2, true);
+		}
+		else if (brojIgre == 3)
+		{
+			int pomocna = 0;
+			LOTO loto;
+			if (k.provjeraKljuca(3))
+				lotoIgra(&pomocna, &k.brojBodova, &loto, k);
+			else
+			{
+				k.ucitajKljuc(3);
+				lotoIgra(&pomocna, &k.brojBodova, &loto, k);
+			}
+			statistika(k.brojBodova, 3, true);
+		}
+		else if (brojIgre == 4)
+		{
+			if (k.provjeraKljuca(4))
+				vjesala(k.brojBodova,k);
+			else
+			{
+				k.ucitajKljuc(4);
+				vjesala(k.brojBodova,k);
+			}
+			statistika(k.brojBodova, 4, true);
+		}
+		else if (brojIgre == 5)
+		{
+			std::cout << u8"Za koju igru želite prikaz statistike (1/2/3/4) ?";
+			int broj;
+			std::cin >> broj;
+			statistika(k.brojBodova, broj,false);
+			Sleep(7000); // prikazuje statistiku 7 s
+		}
+
+		else
+			std::cout << "Niste unijeli validan broj " << std::endl;
+		system("cls");
 	}
 	system("pause"); // omogucava da prozor ostane otvoren
 	return 0;
