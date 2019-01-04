@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <iostream>
-void statistika(int, int,bool);
-void IspisiStatistiku(struct Stats, int);
+void statistika(int, int, bool);
+void IspisiStatistiku(struct Stats,int);
 void PisiUStatistiku(struct Stats);
 void UmetniTrenutneBodove(int, struct Stats, int);
 void PisiUCSVFajl(struct Stats);

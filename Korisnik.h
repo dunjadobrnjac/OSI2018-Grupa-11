@@ -14,12 +14,12 @@ public:
 	void upisiBodove()const;
 	void ispisiBodove()const;
 	void ucitajBodove();
-	void ucitajKljuc();
+	void ucitajKljuc(int);
 	void upisKljuca(int,int);
 	bool provjeraKljuca(int);
-private:
 	int brojBodova;
 	int brojUlozenihBodova;
+private:
 	char* ime;
 	void sacuvajIme();
 	static int brUlaza;

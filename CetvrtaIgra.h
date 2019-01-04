@@ -1,4 +1,5 @@
 #pragma once
+#include "Korisnik.h"
 #include <string>
 #include <iostream>
 
@@ -11,4 +12,4 @@ bool pogadjajSlova(std::string,std::string);
 std::string ucitajNasumicnuRijec(std::string);
 int ostaloPokusaja(std::string, std::string);
 std::string ucitajTip(std::string,std::string);
-void vjesala(int&);
+void vjesala(int&,Korisnik);

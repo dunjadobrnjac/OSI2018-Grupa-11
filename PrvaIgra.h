@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Korisnik.h"
 #include <iostream>
 #include <fstream>
 #include <cstdlib>  // sadrzi random funkciju - stalno vraca isti broj 
@@ -8,6 +9,6 @@
 #include <Windows.h>
 
 
-void igrajPrvuIgru(int&);
+void igrajPrvuIgru(int&,Korisnik);
 int prvaIgraPrava(int &, int&);
 int prvaIgraVaranje(int &,int&);

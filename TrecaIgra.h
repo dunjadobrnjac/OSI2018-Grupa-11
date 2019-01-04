@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Korisnik.h"
 #include <iostream>
 #include <cstdlib>  // sadrzi random funkciju - stalno vraca isti broj 
 #include <time.h>   // zato treba i ova koja ima srand
@@ -17,5 +18,5 @@ bool funkcijaZaVaranje(int* , int [], int , int , int []);
 int brojPogodakaFunkcija(int [], int []);
 int sumaBodova(int );
 void sortirajNiz(int* , int );
-void ispisiRezultat(int [], int [], int );
-void lotoIgra(int* , int* , LOTO* );
+void ispisiRezultat(int [], int [], int,Korisnik );
+void lotoIgra(int* , int* , LOTO*,Korisnik );
