@@ -37,6 +37,7 @@ std::string Vrijeme()
 	return TrenutniDatum;
 
 }
+
 void SelectionSort(Stats niz[], int n)
 {
 	int i, j;
@@ -46,15 +47,15 @@ void SelectionSort(Stats niz[], int n)
 		for (j = i; j < n; j++)
 			if (niz[max].brojBodova < niz[j].brojBodova)
 				max = j;
-		  if(max!=i)
-			{
-				Stats pom = niz[i];
-				niz[i] = niz[max];
-				niz[max] = pom;
-			}
+		if (max != i)
+		{
+			Stats pom = niz[i];
+			niz[i] = niz[max];
+			niz[max] = pom;
+		}
 	}
 }
-void PisiUCSVFajl(Stats niz[])
+void PisiUCSVFajl(struct Stats niz[])
 {
 	std::ofstream Pisi;
 	Pisi.open("StatistikaCsv.csv");
@@ -73,6 +74,7 @@ void PisiUCSVFajl(Stats niz[])
 		Pisi.close();
 	}
 }
+
 void UmetniTrenutneBodove(int bod, Stats niz[], int brojIgre)
 {
 	bool k = true;
@@ -97,7 +99,7 @@ void UmetniTrenutneBodove(int bod, Stats niz[], int brojIgre)
 }
 void PisiUStatistiku(Stats niz[])
 {
-	std::ofstream Pisi("Statistika.txt",std::ios_base::app);
+	std::ofstream Pisi("Statistika.txt");
 	if (Pisi.is_open())
 	{
 		for (int i = 1; i < 5; i++)
@@ -115,27 +117,28 @@ void PisiUStatistiku(Stats niz[])
 		Pisi.close();
 	}
 }
-void IspisiStatistiku(Stats niz[])
+void IspisiStatistiku(Stats niz[],int igra)
 {
-	for (int i = 1; i < 5; i++)
-	{
+	//for (int i = 1; i < 5; i++)
+	
 		for (int j = 0; j < 10; j++)
 		{
-			if (niz[j].brojIgre == i)
+			if (niz[j].brojIgre == igra)
 			{
 				std::cout << "\n" << niz[j].brojIgre << ". Igra: " << niz[j].datum << " ----- " << niz[j].brojBodova << std::endl;
 
 			}
 		}
-	}
+	
 }
-void statistika(int bodovi, int brojIgre)
+void statistika(int bodovi, int brojIgre,bool provjera)
 {
 
 	Stats niz[10];
 	std::ifstream MyDat;
 	std::string vr=Vrijeme();
-	upisiUDat(brojIgre,bodovi,vr);
+	if(provjera)
+	  upisiUDat(brojIgre,bodovi,vr);
 	MyDat.open("Statistika.txt");
 	if (MyDat.is_open())
 	{
@@ -157,14 +160,15 @@ void statistika(int bodovi, int brojIgre)
 		}
 		MyDat.close();
 	}
-	BubbleSort(niz, 10);
+	SelectionSort(niz, 10);
 	int j;
 	for (j = 0; j < 10 && vr != niz[j].datum; j++);
 	if (j == 10)
 	UmetniTrenutneBodove(bodovi, niz, brojIgre); // POZVATI AKO JE STATISTIKA PUNA MIJENJA NAJMANJI BROJ BODOVA ZA DATU IGRU
-	BubbleSort(niz, 10);
-	IspisiStatistiku(niz);
+	SelectionSort(niz, 10);
 	PisiUStatistiku(niz);
+	if(!provjera)
+	 IspisiStatistiku(niz,brojIgre);
 	PisiUCSVFajl(niz);
 }
 void upisiUDat(int igra,int bodovi,std::string vr)
