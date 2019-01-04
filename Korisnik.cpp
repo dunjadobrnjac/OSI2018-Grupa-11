@@ -14,9 +14,11 @@ Korisnik::Korisnik(int br1, int br2)
 
 Korisnik::~Korisnik()
 {
+	delete[] ime;
+	ime = nullptr;
 }
 
-const char * Korisnik::getIme() const
+const char* Korisnik::getIme() const
 {
 	char *s = new char[20];
 	std::ifstream ulaz;
@@ -98,7 +100,7 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 std::istream & operator>>(std::istream &input, Korisnik &k)
 {
 	char s[20];
-	std::cout << "Ime: "; input >> s;
+	std::cout << "Unesite ime : "; input >> s;
 	k.ime = new char[strlen(s) + 1];
 	strcpy(k.ime, s);
 	k.ime[strlen(s)] = 0;
@@ -138,7 +140,7 @@ void Korisnik::upisiBodove()const
 
 void Korisnik::ispisiBodove() const
 {
-	std::cout << std::endl << brojBodova << " " << brojUlozenihBodova << std::endl;
+	std::cout << u8"Vaš trenutni broj bodova je : "<< brojBodova << u8"\nVaš uloženi broj bodova je : " << brojUlozenihBodova << std::endl;
 }
 
 void Korisnik::ucitajBodove()
@@ -160,10 +162,10 @@ std::ostream & operator<<(std::ostream &output, const Korisnik &k)
 	return output;
 }
 
-void Korisnik::ucitajKljuc()
+void Korisnik::ucitajKljuc(int igra)
 {
-	int igra;
-	std::cout << "Za koju igru zelite kljuc: "; std::cin >> igra;
+	/*int igra;
+	std::cout << "Za koju igru zelite kljuc: "; std::cin >> igra;*/
 	int t;
 	std::cout << "Unesite broj za trajanje kljuca: 1-1h  2-1dan 3-7dana :"; std::cin >> t;
 	if (dajKljuc(t, igra))
