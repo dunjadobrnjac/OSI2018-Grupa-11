@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <Windows.h>
 #define sleep(x) Sleep(x)
+
 class LOTO
 {
 public:
@@ -16,6 +17,9 @@ public:
 int isTheSame(int [], int );
 bool funkcijaZaVaranje(int* , int [], int , int , int []);
 int brojPogodakaFunkcija(int [], int []);
+int kolikoSmijePogoditi(Korisnik, bool&);
+int daLiJePogodjen(int , int[]);
+int odrediPoziciju(int[], int[]);
 int sumaBodova(int );
 void sortirajNiz(int* , int );
 void ispisiRezultat(int [], int [], int,Korisnik );
