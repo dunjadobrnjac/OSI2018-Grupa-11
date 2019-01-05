@@ -20,8 +20,6 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 
 		int* nizUnesenih = new int[5];
 
-		std::cout << random << " " << varalica << std::endl;
-
 		do
 		{
 				do //petlja za provjeru uslova prilikom unosenja brojeva
@@ -81,7 +79,7 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 			std::cout << u8" Čestitamo! Pogodili ste broj." << std::endl;
 			osvojeniBodovi += 100 / varalica;
 		}
-		//++brojIgranja;
+		
 		while (true) // pitanje hoce li ponovo igrati
 		{
 			std::cout << u8" Da li želite ponovo da igrate? (Da/Ne)? ";
