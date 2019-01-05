@@ -18,15 +18,31 @@ int main()
 
 	std::cout << "BringITon platforma za igre\n" << std::endl;
 
+	int resstart = 0;
+	std::ifstream restart;
+	restart.open("restart.txt");
+	if (restart.is_open())
+	{
+		restart >> resstart;
+		restart.close();
+	}
+
 	Korisnik k;
 	k.ucitajBodove();
-
-	if (k.getBrUlaza() == 0)
+	
+	if (!resstart)
 	{
-		std::cin >> k;
-		std::cout << k;
-		std::cout << u8"Omoguæeno je igranje samo prve igre ." << std::endl;
-		std::cout << u8"Da li želite da igrate prvu igru --> Pogaðanje sluèajnog broja ? (Da/Ne)" << std::endl;
+		if (k.getBrUlaza() == 0)
+		{
+			std::cin >> k;
+			std::cout << k;
+		}
+		else
+		{
+			std::cout << "Pozdrav " << k.getIme() << "!" << std::endl;
+		}
+		std::cout << u8"Omoguceno je igranje samo prve igre ." << std::endl;
+		std::cout << u8"Da li želite da igrate prvu igru --> Pogadanje slucajnog broja ? (Da/Ne)" << std::endl;
 		std::string odgovor;
 		while (true) 
 		{
@@ -43,18 +59,20 @@ int main()
 		if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
 		{
 			k.ucitajKljuc(1);
-			igrajPrvuIgru(k.brojBodova,k);
+			igrajPrvuIgru(k.brojBodova, k);
 			statistika(k.brojBodova, 1, true);
 		}
 		else
 			if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0)
 				return 0;
-
+		std::ofstream restart;
+		restart.open("restart.txt");
+		if (restart.is_open())
+		{
+			restart << 1;
+			restart.close();
+		}
 		system("cls");
-	}
-	else
-	{
-		std::cout << "Pozdrav " << k.getIme() << "!" << std::endl;
 	}
 
 
