@@ -7,6 +7,7 @@
 #include <random>
 #include <ctime>
 #include "DrugaIgra.h"
+#include "Varanje.h"
 #include <cstdlib>
 #include <cstdio>
 #define BP 15 // broj pitanja ovdje promjeniti ako se stave nova
@@ -17,11 +18,14 @@ struct Pitanje
 	std::string tacanOdgovor;
 };
 
-void ucitajPitanja(Pitanje nizPitanja[])
+void ucitajPitanja(Pitanje nizPitanja[], int rezim)
 {
 	std::ifstream pt;
 	std::string line;
-	pt.open("pitanjapitanja.txt");
+	if (rezim == 0)
+		pt.open("pitanjapitanja0.txt");
+	else
+		pt.open("pitanjapitanja1.txt");
 	if (pt.is_open())
 	{
 		//std::cout << "Otvorena pitanja.txt";
@@ -58,13 +62,14 @@ void RandomPitanjee(int cuvar[])
 }
 void igrajDruguIgru(int& bodovi,Korisnik k)
 {
+	pocetak2:
 	srand(time(NULL));
 	std::string odgovor;
-
 	int cuvar[BP];
 	Pitanje nizPitanja[BP];
 	
-	ucitajPitanja(nizPitanja);
+	int rezim = funkcijaKakoOdigrati(k);
+	ucitajPitanja(nizPitanja, rezim);
 	RandomPitanjee(cuvar);
 
 	for (int i = 0; i < BP; i++)
@@ -81,6 +86,14 @@ void igrajDruguIgru(int& bodovi,Korisnik k)
 			bodovi += 20;
 		else if (odgovor != nizPitanja[cuvar[i]].tacanOdgovor)
 			bodovi -= 30;
+	}
+	bool a = false;
+	std::cout << u8"Da li želite opet igrati? (1/0)";
+	std::cin >> a;
+	if (a)
+	{
+		system("cls");
+		goto pocetak2;
 	}
 	k.brojBodova = bodovi;
 	k.upisiBodove();
