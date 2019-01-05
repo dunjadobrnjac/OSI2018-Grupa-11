@@ -153,9 +153,16 @@ string ucitajTip(string putanja, string rijec)
 void vjesala(int& bodovi, Korisnik k)
 {
 	srand(time(0));//da bi se trazena rijec uvijek nasumicno nasla
+	pocetak4:
 	string rijecZaPogoditi;
 	string pokusaji;
-	rijecZaPogoditi = ucitajNasumicnuRijec("rijeciZaPogadjanje.txt");
+	int rezim = funkcijaKakoOdigrati(k);
+	if(rezim==2)
+		rijecZaPogoditi = ucitajNasumicnuRijec("rijeciZaPogadjanje2.txt");
+	else if(rezim==1)
+		rijecZaPogoditi = ucitajNasumicnuRijec("rijeciZaPogadjanje1.txt");
+	else
+		rijecZaPogoditi = ucitajNasumicnuRijec("rijeciZaPogadjanje0.txt");
 	string tip = ucitajTip("rijeciZaPogadjanje.txt", rijecZaPogoditi);
 	int brojPokusaja = 0;
 	bool pogodak = false;
@@ -212,6 +219,15 @@ void vjesala(int& bodovi, Korisnik k)
 	}
 	k.brojBodova = bodovi;
 	k.upisiBodove();
+
+	bool a = false;
+	std::cout << u8"Da li želite opet igrati? (1/0)";
+	std::cin >> a;
+	if (a)
+	{
+		system("cls");
+		goto pocetak4;
+	}
 
 	getchar();
 }

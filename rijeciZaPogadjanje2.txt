@@ -1,0 +1,12 @@
+SKRIPTARNICA imenica
+PODRUM imenica
+VODOSTAJ imenica
+KUHINJA imenica
+LAPTOP imenica
+BLOK imenica
+STOLICA imenica
+TELEFON imenica
+STRUJA imenica
+ZEBRA imenica
+JAKNA imenica
+PANTALONE imenica
