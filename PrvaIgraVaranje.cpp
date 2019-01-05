@@ -1,11 +1,4 @@
 ﻿#include "PrvaIgra.h"
-#include <iostream>
-#include <fstream>
-#include <cstdlib>  // sadrzi random funkciju - stalno vraca isti broj 
-#include <time.h>   // zato treba i ova koja ima srand
-#include <string>  // sl sve tri biblioteke su zbog š,č,đ,.. valjdaa
-#include <cstdio>
-#include <Windows.h>
 
 int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 {
@@ -106,6 +99,10 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 
 		odluka = 1;
 
+		brojIgranja++;
+		std::ofstream output("brojigranja.txt");
+		output << brojIgranja;
+
 		if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("nE") == 0 || odgovor.compare("NE") == 0)
 		{
 			std::cout << " Hvala na igranju!" << std::endl;
@@ -113,7 +110,9 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 
 			break;
 		}
-		brojIgranja++;
+
+		
+
 		system("cls");
 	}
 	return odluka;

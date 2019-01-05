@@ -25,8 +25,6 @@ void igrajPrvuIgru(int& bodovi, Korisnik k)
 			if (prvaIgraPrava(brojIgranja,bodovi) == 0)
 				break;
 		}
-		std::ofstream output("brojigranja.txt");
-		output << brojIgranja;
 	}
 	k.brojBodova = bodovi;
 	k.upisiBodove();

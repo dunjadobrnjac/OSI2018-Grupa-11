@@ -71,8 +71,8 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi)
 		}
 		else if (brojPokusaja == 5)
 			std::cout << u8" Nemate više pokušaja." << std::endl;
-		++brojIgranja;
-		while (true) // pitanje hoce li ponovo igrati
+
+		while (true)	// pitanje hoce li ponovo igrati
 		{
 			std::cout << u8" Da li želite ponovo da igrate? (Da/Ne)? ";
 			std::cin >> odgovor;
@@ -83,12 +83,15 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi)
 			else
 				std::cout << " Unesite 'Da' ili 'Ne'...\n";
 
-
 		}
 
 		delete[] nizUnesenih;
 
 		odluka = 1;
+
+		brojIgranja++;
+		std::ofstream output("brojigranja.txt");
+		output << brojIgranja;
 
 		if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("nE") == 0 || odgovor.compare("NE") == 0)
 		{
@@ -96,8 +99,11 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi)
 			odluka = 0;
 			break;
 		}
-		brojIgranja++;
+
+		
+
 		system("cls");
 	}
+	std::cout << odluka;
 	return odluka;
 }
