@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "PrvaIgra.h"
 #include "DrugaIgra.h"
 #include "TrecaIgra.h"
@@ -88,9 +89,15 @@ int main()
 		std::cout << " 3 --> Loto " << std::endl;
 		std::cout << u8" 4 --> Vješala" << std::endl;
 		std::cout << " 5 --> Prikaz statistike" << std::endl;
-		std::cout << u8" 6 --> Kupovina/preuzimanje kljuèa \n" << std::endl;
+		std::cout << u8" 6 --> Kupovina/preuzimanje kljuèa" << std::endl;
+		std::cout << " 7 --> Otkazivanje igre\n" << std::endl;
 		std::cout << u8" Unesite odgovarajuæi broj: ";
-		std::cin >> brojIgre;
+		while (!(std::cin >> brojIgre) || std::cin.get() != '\n')
+		{
+			std::cout << "--> Unos nije validan!\n--> Unesite odgovarajuci broj ponovo: ";
+			std::cin.clear();
+			std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
+		}
 		system("cls");
 		if (brojIgre == 1)
 		{
@@ -158,7 +165,15 @@ int main()
 		}
 		else if (brojIgre == 6)
 		{
-			bool l=varanjePriprema(k);
+			bool l = varanjePriprema(k);
+		}
+		else if (brojIgre == 7)
+		{
+			std::cout << u8" Koju igru želite da otkažete (1/2/3/4)?" << std::endl;
+			std::cout << "--> ";
+			int broj;
+			std::cin >> broj;
+			k.otkaziIgru(broj);
 		}
 		else
 			std::cout << "Niste unijeli validan broj " << std::endl;
