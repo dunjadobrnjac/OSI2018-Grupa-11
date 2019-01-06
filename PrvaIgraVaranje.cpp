@@ -24,10 +24,11 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 		{
 				do //petlja za provjeru uslova prilikom unosenja brojeva
 				{
-					std::cout << " Unesi broj od 0 do 100 : ";
+					std::cout << "=================================================" << std::endl;
+					std::cout << " Unesi broj od 0 do 100 : " << std::endl;
 					while (!(std::cin >> broj) || std::cin.get() != '\n')
 					{
-						std::cout << " Unos nije validan! Unesite broj ponovo: ";
+						std::cout << " --> Unos nije validan! Unesite broj ponovo: ";
 						std::cin.clear();
 						std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // zabrana unosenja chakova i slova
 					}
@@ -36,7 +37,7 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 						if (nizUnesenih[j] == broj)
 						{
 							postoji = true;
-							std::cout << u8" Ovaj broj je već unesen! Unesite ponovo..." << std::endl;
+							std::cout << u8"--> Ovaj broj je već unesen! Unesite ponovo..." << std::endl;
 						}
 					if (!postoji)
 					{
@@ -48,7 +49,7 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 								(nizUnesenih[indeks - k] < random && broj < nizUnesenih[indeks - k]))
 							{
 								omoguciUpis = false;
-								std::cout << u8" Molimo Vas da obratite pažnju na prethodno ispisanu poruku (Vaš broj nije u odgovarajućem opsegu)" << std::endl;
+								std::cout << u8" --> Molimo Vas da obratite pažnju na prethodno ispisanu poruku (Vaš broj nije u odgovarajućem opsegu)" << std::endl;
 								break;
 
 							}
@@ -57,26 +58,28 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 							nizUnesenih[indeks++] = broj;
 					}
 					if (broj < 0 || broj>100)
-						std::cout << " Uneseni broj nije u dozvoljenom opsegu. " << std::endl;
+						std::cout << "--> Uneseni broj nije u dozvoljenom opsegu. " << std::endl;
 				} while (broj < 0 || broj > 100 || postoji || !omoguciUpis);					//ogranicenje opsega
 				++brojPokusaja;
 				if (brojPokusaja == varalica)
 					break;
 					if (random < broj)																//petlja za pogadjanje brojeva
-						std::cout << u8" Broj koji tražite je manji od unesenog broja.\n";			// moze i <<std::endl- prelazak u novi red
+						std::cout << u8"--> Broj koji tražite je manji od unesenog broja.\n";			// moze i <<std::endl- prelazak u novi red
 					else if (random > broj)
-						std::cout << u8" Broj koji tražite je veći od unesenog broja.\n";
+						std::cout << u8"--> Broj koji tražite je veći od unesenog broja.\n";
 		} while (broj != random && brojPokusaja < varalica);
 
 
 		if (broj == random)
 		{
 			std::cout << u8" Čestitamo! Pogodili ste broj." << std::endl;
+			std::cout << "=================================================" << std::endl;
 			osvojeniBodovi += 100 / brojPokusaja;
 		}
 		else if (brojPokusaja == varalica)
 		{
 			std::cout << u8" Čestitamo! Pogodili ste broj." << std::endl;
+			std::cout << "=================================================" << std::endl;
 			osvojeniBodovi += 100 / varalica;
 		}
 		

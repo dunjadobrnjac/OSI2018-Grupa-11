@@ -1,4 +1,5 @@
 #include "CetvrtaIgra.h"
+#include "Varanje.h"
 #include <vector>
 #include <time.h>
 #include <fstream>
@@ -220,10 +221,19 @@ void vjesala(int& bodovi, Korisnik k)
 	k.brojBodova = bodovi;
 	k.upisiBodove();
 
-	bool a = false;
-	std::cout << u8"Da li želite opet igrati? (1/0)";
-	std::cin >> a;
-	if (a)
+	std::string odg;
+	std::cout << u8"Da li želite opet igrati? (Da/Ne)" << std::endl;
+	while (true)
+	{
+		std::cin >> odg;
+
+		if (odg.compare("ne") == 0 || odg.compare("Ne") == 0 || odg.compare("NE") == 0 || odg.compare("nE") == 0
+			|| odg.compare("da") == 0 || odg.compare("Da") == 0 || odg.compare("dA") == 0 || odg.compare("DA") == 0)
+			break;
+		else
+			std::cout << "Unesite 'Da' ili 'Ne'...\n";
+	}
+	if (odg.compare("da") == 0 || odg.compare("Da") == 0 || odg.compare("dA") == 0 || odg.compare("DA") == 0)
 	{
 		system("cls");
 		goto pocetak4;

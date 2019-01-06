@@ -78,55 +78,55 @@ void sortirajNiz(int *niz, int n)
 
 void ispisiRezultat(int loto[], int odigrani[], int broj, Korisnik k)
 {
-	std::cout << "================================="<<std::endl;
-	std::cout << u8"Odigrali ste sledeću kombinaciju:" << std::endl;
-	std::cout << "---------------------------------" << std::endl;
+	std::cout << "=================================="<<std::endl;
+	std::cout << u8"Odigrali ste sljedeću kombinaciju:" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 	sortirajNiz(odigrani, 7);
 	for (int i = 0; i < 7; i++)
 		std::cout << odigrani[i] << u8" ";
 	std::cout << std::endl;
-	std::cout << "=================================" << std::endl << std::endl;
+	std::cout << "==================================" << std::endl;
 	std::cout << std::endl;
 	//sortirajNiz(loto, 20);
-	std::cout << "=================================" << std::endl;
+	std::cout << "==================================" << std::endl;
 	std::cout << u8"Izvučeni brojevi su:"<<std::endl;
-	std::cout << "---------------------------------";
+	std::cout << "----------------------------------";
 	for (int i = 0; i < 20; i++)
 	{
 		if (i % 10 == 0)
 			std::cout << std::endl;
 		if (loto[i] < 10)
-			std::cout << u8" ";
-		std::cout << loto[i] << u8" ";
+			std::cout << " ";
+		std::cout << loto[i] << " ";
 		std::cout.flush();
 		sleep(1000);
 	}
-	std::cout << std::endl << "=================================" << std::endl << std::endl;
-	std::cout << std::endl;
+	std::cout << std::endl << "==================================" << std::endl;
+	//std::cout << std::endl;
 	sortirajNiz(loto, 20);
 	sleep(1000);
 	std::cout << "\n\n";
-	std::cout << "=================================" << std::endl;
+	std::cout << "==================================" << std::endl;
 	std::cout << u8"KONAČNO: ==> IZVUČENI BROJEVI SU: " << std::endl;
-	std::cout << "---------------------------------";
+	std::cout << "----------------------------------";
 	for (int i = 0; i < 20; i++)
 	{
 		if (i % 10 == 0)
 			std::cout << std::endl;
 		if(loto[i]<10)
-			std::cout<< u8" ";
-		std::cout << loto[i] << u8" ";
+			std::cout<< " ";
+		std::cout << loto[i] << " ";
 	}
-	std::cout <<std::endl << "=================================" << std::endl<< std::endl;
+	std::cout << std::endl << "==================================" << std::endl;
 	std::cout << std::endl;
-	std::cout << std::endl;
+	//std::cout << std::endl;
 	int osvojeniBodoviRezultat = sumaBodova(broj);
-	std::cout << "=================================" << std::endl;
-	std::cout << u8"Pogodili ste ukupno " << broj << u8" broj" << ((broj > 0) ? ((broj > 1) ? ((broj > 4) ? u8"eva." : u8"a.") : u8".") : u8"eva.")<<std::endl;
-	std::cout << "---------------------------------" << std::endl;
-	std::cout<< u8"Osvojili ste " << osvojeniBodoviRezultat << u8" bodova." << std::endl;
-	std::cout << "=================================" << std::endl;
-	std::cout << std::endl << std::endl;
+	std::cout << "==================================" << std::endl;
+	std::cout << "Pogodili ste ukupno " << broj << " broj" << ((broj > 0) ? ((broj > 1) ? ((broj > 4) ? "eva." : "a.") : ".") : "eva.")<<std::endl;
+	std::cout << "----------------------------------" << std::endl;
+	std::cout<< "Osvojili ste " << osvojeniBodoviRezultat << " bodova." << std::endl;
+	std::cout << "==================================" << std::endl;
+	std::cout << std::endl;
 	//Za klasu korisnik
 	k.brojBodova += osvojeniBodoviRezultat;
 	k.upisiBodove();
@@ -167,9 +167,9 @@ pocetak:
 			std::cout << u8"Unesite 7 različitih brojeva u opsegu od 1 do 45:" << std::endl;
 			int j = 0;
 			while (loto->odigraniBrojevi[j] != 0)
-				std::cout << loto->odigraniBrojevi[j++] << u8" ";
+				std::cout << loto->odigraniBrojevi[j++] << " ";
 			std::cout<<std::endl;
-			std::cout << u8"Unesite " << i + 1 << u8". broj" << std::endl;
+			std::cout << "Unesite " << i + 1 << ". broj :" << std::endl;
 			/*if (pom < 1)
 				std::cout << u8"Uneseni broj je manji od jedan, pa morate unijeti drugi broj umjesto ovog";
 			if (pom > 45)
@@ -187,7 +187,7 @@ pocetak:
 				while (loto->odigraniBrojevi[j] != 0)
 					std::cout << loto->odigraniBrojevi[j++] << u8" ";
 				std::cout << std::endl;
-				std::cout << u8"Unesite " << i + 1 << u8". broj" << std::endl;
+				std::cout << "Unesite " << i + 1 << ". broj" << std::endl;
 			}
 			p = (pom > 45) || (pom < 0) || isTheSame(loto->odigraniBrojevi, pom);
 			if (p && (pom > 0 && pom < 45))
@@ -244,11 +244,21 @@ pocetak:
 	}
 	brojPogodaka = brojPogodakaFunkcija(loto->lotoBrojevi, loto->odigraniBrojevi);
 	ispisiRezultat(loto->lotoBrojevi, loto->odigraniBrojevi, brojPogodaka, k);
-	bool a = false;
-	std::cout << u8"Da li želite opet igrati? (1/0)";
-	std::cin >> a;
-	if (a)
-	{	
+	
+	std::string odgovor;
+	std::cout << u8"Da li želite opet igrati? (Da/Ne)" << std::endl;
+	while (true)
+	{
+		std::cin >> odgovor;
+
+		if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0
+			|| odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+			break;
+		else
+			std::cout << "Unesite 'Da' ili 'Ne'...\n";
+	}
+	if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+	{
 		system("cls");
 		goto pocetak;
 	}

@@ -72,11 +72,13 @@ void igrajDruguIgru(int& bodovi,Korisnik k)
 	ucitajPitanja(nizPitanja, rezim);
 	RandomPitanjee(cuvar);
 
-	for (int i = 0; i < BP; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		do
 		{
+			std::cout << "=================================================" << std::endl;
 			std::cout << nizPitanja[cuvar[i]].pitanja << std::endl;
+			std::cout << "=================================================" << std::endl;
 			std::cout << "Unesite odgovor (a, b ili c):" << std::endl;
 			std::cin >> odgovor;
 			system("cls");
@@ -87,10 +89,20 @@ void igrajDruguIgru(int& bodovi,Korisnik k)
 		else if (odgovor != nizPitanja[cuvar[i]].tacanOdgovor)
 			bodovi -= 30;
 	}
-	bool a = false;
-	std::cout << u8"Da li želite opet igrati? (1/0)";
-	std::cin >> a;
-	if (a)
+	
+	std::string odg;
+	std::cout << u8"Da li želite opet igrati? (Da/Ne)" << std::endl;
+	while (true)
+	{
+		std::cin >> odg;
+
+		if (odg.compare("ne") == 0 || odg.compare("Ne") == 0 || odg.compare("NE") == 0 || odg.compare("nE") == 0
+			|| odg.compare("da") == 0 || odg.compare("Da") == 0 || odg.compare("dA") == 0 || odg.compare("DA") == 0)
+			break;
+		else
+			std::cout << "Unesite 'Da' ili 'Ne'...\n";
+	}
+	if (odg.compare("da") == 0 || odg.compare("Da") == 0 || odg.compare("dA") == 0 || odg.compare("DA") == 0)
 	{
 		system("cls");
 		goto pocetak2;
