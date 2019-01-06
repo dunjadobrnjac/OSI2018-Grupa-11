@@ -30,7 +30,7 @@ const char* Korisnik::getIme() const
 	return s;
 }
 
-const int & Korisnik::getBrUlaza()const
+const int& Korisnik::getBrUlaza()const
 {
 	std::ifstream br;
 	br.open("brojUlaza.txt");
@@ -81,12 +81,12 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 		red1.open("redKljucevaPoTrajanjima.txt"); red1 << r[0] << "\n" << r[1] << "\n" << r[2] << "\n" << r[3];
 		red1.close();
 		std::cout << s;
-		std::cout << std::endl << "Zapisite na papir da ne biste zaboravili,imate 15s !" << std::endl;
-		Sleep(15000);
+		std::cout << std::endl << u8"Molimo Vas da kopirate kljuè, imate 7 sekundi!" << std::endl;
+		Sleep(7000);
 		//system("pause");
 	}
 	system("cls");
-	std::cout << "Unesite trazeni kljuc: ";
+	std::cout << u8"Unesite traženi kljuc: ";
 	char s1[20];
 	std::cin >> s1;
 	if (strcmp(s1, s) == 0)
@@ -97,10 +97,10 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 	return false;
 }
 
-std::istream & operator>>(std::istream &input, Korisnik &k)
+std::istream& operator>>(std::istream& input, Korisnik& k)
 {
 	char s[20];
-	std::cout << "Unesite ime : "; input >> s;
+	std::cout << "Unesite ime: "; input >> s;
 	k.ime = new char[strlen(s) + 1];
 	strcpy(k.ime, s);
 	k.ime[strlen(s)] = 0;
@@ -140,7 +140,8 @@ void Korisnik::upisiBodove()const
 
 void Korisnik::ispisiBodove() const
 {
-	std::cout << u8"Vaš trenutni broj bodova je : "<< brojBodova << u8"\nVaš uloženi broj bodova je : " << brojUlozenihBodova << std::endl;
+	std::cout << u8"Vaš trenutni broj bodova je: " << brojBodova;
+	//std::cout << u8"\nVaš uloženi broj bodova je: " << brojUlozenihBodova << std::endl;
 }
 
 void Korisnik::ucitajBodove()
@@ -156,7 +157,7 @@ void Korisnik::ucitajBodove()
 
 
 
-std::ostream & operator<<(std::ostream &output, const Korisnik &k)
+std::ostream& operator<<(std::ostream& output, const Korisnik& k)
 {
 	output << "Pozdrav " << k.ime << " !" << std::endl;
 	return output;
@@ -164,13 +165,14 @@ std::ostream & operator<<(std::ostream &output, const Korisnik &k)
 
 void Korisnik::ucitajKljuc(int igra)
 {
-	/*int igra;
-	std::cout << "Za koju igru zelite kljuc: "; std::cin >> igra;*/
 	int t;
-	std::cout << "Unesite broj za trajanje kljuca: 1-1h  2-1dan 3-7dana :"; std::cin >> t;
+	std::cout << u8"Odaberite trajanje kljuèa:\n";
+	std::cout<< "1 -> 1h\n" << "2 -> 1 dan\n" << "3 -> 7 dana\n"; 
+	std::cout << "--> ";
+	std::cin >> t;
 	if (dajKljuc(t, igra))
 	{
-		std::cout << "Mozete igrati " << igra << ". igru ";
+		std::cout << u8"Možete igrati " << igra << ". igru ";
 		switch (t)
 		{
 		case 1:
@@ -183,12 +185,12 @@ void Korisnik::ucitajKljuc(int igra)
 			std::cout << "narednih 7 dana." << std::endl;
 			break;
 		case 4:
-			std::cout << "neograniceno." << std::endl;
+			std::cout << u8"neograniceno." << std::endl;
 			break;
 		}
 	}
 	else
-		std::cout << "Nemate pristup " << igra << ". igri, kljuc nije validan." << std::endl;
+		std::cout << "Nemate pristup " << igra << u8". igri, Vaš kljuè nije validan!" << std::endl;
 }
 
 void Korisnik::upisKljuca(int igra,int t)
@@ -261,7 +263,7 @@ bool Korisnik::provjeraKljuca(int igra)
 			sek = 7 * 24 * 3600;
 			break;
 		default:
-			std::cout << "Greska u unosu trajanja kljuca!" << std::endl;
+			std::cout << u8"Greška u unosu trajanja kljuèa!" << std::endl;
 		}
 		//std::cout << trajanje << " " << sek;
 		time_t sad,unijeto;

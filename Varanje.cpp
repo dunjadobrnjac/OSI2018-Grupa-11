@@ -2,13 +2,11 @@
 #include <iostream>
 #include <fstream>
 
-
 int funkcijaKakoOdigrati(Korisnik k)
 {
 
 	if (k.brojBodova < 0)
 	{
-		
 		return 2;
 	}
 	int referentniBrojBodova = 0;
@@ -41,7 +39,8 @@ int funkcijaKakoOdigrati(Korisnik k)
 bool varanjePriprema(Korisnik k)
 {
 	int i = 0, datoteckiInt = 0;
-	std::cout << u8"Za koju igricu želite kupiti/preuzeti kljuc? (1/2/3/4)" << std::endl;
+	std::cout << u8"Za koju igricu želite kupiti/preuzeti kljuè? (1/2/3/4)" << std::endl;
+	std::cout << "-->";
 	std::cin >> i;
 	std::ifstream datoteka;
 	datoteka.open("prviPogodak.txt");
@@ -78,8 +77,8 @@ bool varanjePriprema(Korisnik k)
 		k.ucitajKljuc(i);
 	else
 	{
-		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova, pa ne možete preuzeti kljuè." << std::endl;
-		sleep(3000);
+		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova, pa ne možete preuzeti kljuè!" << std::endl;
+		sleep(4000);
 	}
 	return true;
 }
