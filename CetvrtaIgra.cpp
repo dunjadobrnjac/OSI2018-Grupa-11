@@ -158,13 +158,23 @@ void vjesala(int& bodovi, Korisnik k)
 	string rijecZaPogoditi;
 	string pokusaji;
 	int rezim = funkcijaKakoOdigrati(k);
-	if(rezim==2)
+	string tip;
+	if (rezim == 2)
+	{
 		rijecZaPogoditi = ucitajNasumicnuRijec("rijeciZaPogadjanje2.txt");
-	else if(rezim==1)
+		tip = ucitajTip("rijeciZaPogadjanje2.txt", rijecZaPogoditi);
+	}
+	else if (rezim == 1)
+	{
 		rijecZaPogoditi = ucitajNasumicnuRijec("rijeciZaPogadjanje1.txt");
+		tip = ucitajTip("rijeciZaPogadjanje1.txt", rijecZaPogoditi);
+	}
 	else
+	{
 		rijecZaPogoditi = ucitajNasumicnuRijec("rijeciZaPogadjanje0.txt");
-	string tip = ucitajTip("rijeciZaPogadjanje.txt", rijecZaPogoditi);
+		tip = ucitajTip("rijeciZaPogadjanje0.txt", rijecZaPogoditi);
+	}
+	
 	int brojPokusaja = 0;
 	bool pogodak = false;
 	int j = 0;
