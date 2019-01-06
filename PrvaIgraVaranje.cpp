@@ -107,13 +107,10 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 		if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("nE") == 0 || odgovor.compare("NE") == 0)
 		{
 			std::cout << " Hvala na igranju!" << std::endl;
+			Sleep(1500);
 			odluka = 0;
-
 			break;
 		}
-
-		
-
 		system("cls");
 	}
 	return odluka;
