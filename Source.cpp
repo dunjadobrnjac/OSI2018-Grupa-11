@@ -1,4 +1,4 @@
-#include "Korisnik.h"
+#include "Korisnik.h"
 #include "PrvaIgra.h"
 #include "DrugaIgra.h"
 #include "TrecaIgra.h"
@@ -86,7 +86,8 @@ int main()
 		std::cout << "Kviz --> 2 " << std::endl;
 		std::cout << "Loto --> 3 " << std::endl;
 		std::cout << u8"Vješala --> 4" << std::endl;
-		std::cout << "Prikaz statistike --> 5\n" << std::endl;
+		std::cout << "Prikaz statistike --> 5" << std::endl;
+		std::cout << "Kupovina/preuzimanje kljuca --> 6\n" << std::endl;
 		std::cout << u8"Unesite odgovarajuæi broj : ";
 		std::cin >> brojIgre;
 		system("cls");
@@ -96,8 +97,9 @@ int main()
 				igrajPrvuIgru(k.brojBodova,k);
 			else
 			{
-				k.ucitajKljuc(1);
-				igrajPrvuIgru(k.brojBodova,k);
+				std::cout << u8"Morate nabaviti kljuc da igrate ovu igru" << std::endl;
+				std::cout << u8"Da nabavite kljuc, idite u glavnom meniju u kupovina/preuzimanje kljuca(opcija 6)" << std::endl;
+				sleep(2500);
 			}
 			statistika(k.brojBodova, 1, true);
 
@@ -108,8 +110,9 @@ int main()
 				igrajDruguIgru(k.brojBodova,k);
 			else
 			{
-				k.ucitajKljuc(2);
-				igrajDruguIgru(k.brojBodova,k);
+				std::cout << u8"Morate nabaviti kljuc da igrate ovu igru" << std::endl;
+				std::cout << u8"Da nabavite kljuc, idite u glavnom meniju u kupovina/preuzimanje kljuca(opcija 6)" << std::endl;
+				sleep(2500);
 			}
 			statistika(k.brojBodova, 2, true);
 		}
@@ -118,11 +121,17 @@ int main()
 			int pomocna = 0;
 			LOTO loto;
 			if (k.provjeraKljuca(3))
+			{
+				std::cout << u8"Ulaz u igru je koštao 100 bodova"<<std::endl;
+				sleep(2000);
+				k.brojBodova -= 100;
 				lotoIgra(&pomocna, &k.brojBodova, &loto, k);
+			}
 			else
 			{
-				k.ucitajKljuc(3);
-				lotoIgra(&pomocna, &k.brojBodova, &loto, k);
+				std::cout << u8"Morate nabaviti kljuc da igrate ovu igru" << std::endl;
+				std::cout << u8"Da nabavite kljuc, idite u glavnom meniju u kupovina/preuzimanje kljuca(opcija 6)" << std::endl;
+				sleep(2500);
 			}
 			statistika(k.brojBodova, 3, true);
 		}
@@ -132,8 +141,9 @@ int main()
 				vjesala(k.brojBodova,k);
 			else
 			{
-				k.ucitajKljuc(4);
-				vjesala(k.brojBodova,k);
+				std::cout << u8"Morate nabaviti kljuc da igrate ovu igru" << std::endl;
+				std::cout << u8"Da nabavite kljuc, idite u glavnom meniju u kupovina/preuzimanje kljuca(opcija 6)" << std::endl;
+				sleep(2500);
 			}
 			statistika(k.brojBodova, 4, true);
 		}
@@ -145,7 +155,10 @@ int main()
 			statistika(k.brojBodova, broj,false);
 			Sleep(7000); // prikazuje statistiku 7 s
 		}
-
+		else if (brojIgre == 6)
+		{
+			bool l=varanjePriprema(k);
+		}
 		else
 			std::cout << "Niste unijeli validan broj " << std::endl;
 		system("cls");
