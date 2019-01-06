@@ -289,10 +289,10 @@ bool Korisnik::provjeraKljuca(int igra)
 			std::cout << u8"Greška u unosu trajanja kljuèa!" << std::endl;
 		}
 		//std::cout << trajanje << " " << sek;
-		time_t sad,unijeto;
-		unos >> unijeto;
+		time_t sad,uneseno;
+		unos >> uneseno;
 		time(&sad);
-		if (difftime(sad,unijeto) < sek)
+		if (difftime(sad,uneseno) < sek)
 		{
 			//std::cout << "Razlika u sekundama je " << difftime(sad, unijeto)<<"\n";
 			return true;

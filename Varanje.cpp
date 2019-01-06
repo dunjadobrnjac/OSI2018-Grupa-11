@@ -40,7 +40,7 @@ bool varanjePriprema(Korisnik k)
 {
 	int i = 0, datoteckiInt = 0;
 	std::cout << u8"Za koju igricu želite kupiti/preuzeti kljuè? (1/2/3/4)" << std::endl;
-	std::cout << "-->";
+	std::cout << "--> ";
 	std::cin >> i;
 	std::ifstream datoteka;
 	datoteka.open("prviPogodak.txt");
