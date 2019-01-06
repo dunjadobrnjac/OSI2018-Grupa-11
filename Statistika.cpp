@@ -144,7 +144,7 @@ void IspisiStatistiku(Stats niz[], int brojIgre)
 
 	}
 	if (!provjera)
-		std::cout << "Nema podataka o toj igri.!" << std::endl;
+		std::cout << "Nema podataka o toj igri!" << std::endl;
 }
 void statistika(int bodovi, int brojIgre, bool provjera)
 {
@@ -182,7 +182,8 @@ void statistika(int bodovi, int brojIgre, bool provjera)
 	UmetniTrenutneBodove(bodovi, niz, brojIgre); // POZVATI AKO JE STATISTIKA PUNA MIJENJA NAJMANJI BROJ BODOVA ZA DATU IGRU
 	SelectionSort(niz, 10);
 	PisiUStatistiku(niz);
-	IspisiStatistiku(niz,brojIgre);
+	if(!provjera)
+		IspisiStatistiku(niz,brojIgre);
 	PisiUCSVFajl(niz);
 }
 void upisiUDat(int igra,int bodovi,std::string vr)
