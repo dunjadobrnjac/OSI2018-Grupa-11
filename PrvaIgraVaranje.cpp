@@ -24,8 +24,8 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 		{
 				do //petlja za provjeru uslova prilikom unosenja brojeva
 				{
-					std::cout << "=================================================" << std::endl;
-					std::cout << " Unesi broj od 0 do 100 : " << std::endl;
+					std::cout << "======================================================" << std::endl;
+					std::cout << " Unesi broj od 0 do 100 : ";
 					while (!(std::cin >> broj) || std::cin.get() != '\n')
 					{
 						std::cout << " --> Unos nije validan! Unesite broj ponovo: ";
@@ -49,7 +49,7 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 								(nizUnesenih[indeks - k] < random && broj < nizUnesenih[indeks - k]))
 							{
 								omoguciUpis = false;
-								std::cout << u8" --> Molimo Vas da obratite pažnju na prethodno ispisanu poruku (Vaš broj nije u odgovarajućem opsegu)" << std::endl;
+								std::cout << u8" --> Molimo Vas da obratite pažnju na prethodno \nispisanu poruku (Vaš broj nije u odgovarajućem opsegu)" << std::endl;
 								break;
 
 							}
@@ -73,13 +73,13 @@ int prvaIgraVaranje(int &brojIgranja,int &osvojeniBodovi)
 		if (broj == random)
 		{
 			std::cout << u8" Čestitamo! Pogodili ste broj." << std::endl;
-			std::cout << "=================================================" << std::endl;
+			std::cout << "======================================================" << std::endl;
 			osvojeniBodovi += 100 / brojPokusaja;
 		}
 		else if (brojPokusaja == varalica)
 		{
 			std::cout << u8" Čestitamo! Pogodili ste broj." << std::endl;
-			std::cout << "=================================================" << std::endl;
+			std::cout << "======================================================" << std::endl;
 			osvojeniBodovi += 100 / varalica;
 		}
 		

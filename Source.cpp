@@ -1,9 +1,10 @@
-#include "Korisnik.h"
 #include "PrvaIgra.h"
 #include "DrugaIgra.h"
 #include "TrecaIgra.h"
 #include "CetvrtaIgra.h"
+#include "Korisnik.h"
 #include "Statistika.h"
+#include "Varanje.h"
 #include <iostream>
 #include <cstdio>
 #include <Windows.h>
@@ -41,8 +42,8 @@ int main()
 		{
 			std::cout << "Pozdrav " << k.getIme() << "!" << std::endl;
 		}
-		std::cout << u8"Omoguceno je igranje samo prve igre ." << std::endl;
-		std::cout << u8"Da li želite da igrate prvu igru --> Pogadanje slucajnog broja ? (Da/Ne)" << std::endl;
+		std::cout << u8"Omoguæeno je igranje samo prve igre ." << std::endl;
+		std::cout << u8"Da li želite da igrate prvu igru --> Pogaðanje sluèajnog broja ? (Da/Ne)" << std::endl;
 		std::string odgovor;
 		while (true) 
 		{
@@ -82,13 +83,13 @@ int main()
 	{
 		k.ucitajBodove();
 		k.ispisiBodove();
-		std::cout << u8"\nPogaðanje sluèajnog broja--> 1 " << std::endl;
-		std::cout << "Kviz --> 2 " << std::endl;
-		std::cout << "Loto --> 3 " << std::endl;
-		std::cout << u8"Vješala --> 4" << std::endl;
-		std::cout << "Prikaz statistike --> 5" << std::endl;
-		std::cout << "Kupovina/preuzimanje kljuca --> 6\n" << std::endl;
-		std::cout << u8"Unesite odgovarajuæi broj : ";
+		std::cout << u8"\n 1 --> Pogaðanje sluèajnog broja" << std::endl;
+		std::cout << " 2 --> Kviz" << std::endl;
+		std::cout << " 3 --> Loto " << std::endl;
+		std::cout << u8" 4 --> Vješala" << std::endl;
+		std::cout << " 5 --> Prikaz statistike" << std::endl;
+		std::cout << u8" 6 --> Kupovina/preuzimanje kljuèa \n" << std::endl;
+		std::cout << u8" Unesite odgovarajuæi broj: ";
 		std::cin >> brojIgre;
 		system("cls");
 		if (brojIgre == 1)
@@ -97,9 +98,9 @@ int main()
 				igrajPrvuIgru(k.brojBodova,k);
 			else
 			{
-				std::cout << u8"Morate nabaviti kljuc da igrate ovu igru" << std::endl;
-				std::cout << u8"Da nabavite kljuc, idite u glavnom meniju u kupovina/preuzimanje kljuca(opcija 6)" << std::endl;
-				sleep(2500);
+				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
+				sleep(6000);
 			}
 			statistika(k.brojBodova, 1, true);
 
@@ -110,9 +111,9 @@ int main()
 				igrajDruguIgru(k.brojBodova,k);
 			else
 			{
-				std::cout << u8"Morate nabaviti kljuc da igrate ovu igru" << std::endl;
-				std::cout << u8"Da nabavite kljuc, idite u glavnom meniju u kupovina/preuzimanje kljuca(opcija 6)" << std::endl;
-				sleep(2500);
+				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
+				sleep(6000);
 			}
 			statistika(k.brojBodova, 2, true);
 		}
@@ -123,15 +124,15 @@ int main()
 			if (k.provjeraKljuca(3))
 			{
 				std::cout << u8"Ulaz u igru je koštao 100 bodova"<<std::endl;
-				sleep(2000);
+				sleep(3000);
 				k.brojBodova -= 100;
 				lotoIgra(&pomocna, &k.brojBodova, &loto, k);
 			}
 			else
 			{
-				std::cout << u8"Morate nabaviti kljuc da igrate ovu igru" << std::endl;
-				std::cout << u8"Da nabavite kljuc, idite u glavnom meniju u kupovina/preuzimanje kljuca(opcija 6)" << std::endl;
-				sleep(2500);
+				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
+				sleep(6000);
 			}
 			statistika(k.brojBodova, 3, true);
 		}
@@ -141,9 +142,9 @@ int main()
 				vjesala(k.brojBodova,k);
 			else
 			{
-				std::cout << u8"Morate nabaviti kljuc da igrate ovu igru" << std::endl;
-				std::cout << u8"Da nabavite kljuc, idite u glavnom meniju u kupovina/preuzimanje kljuca(opcija 6)" << std::endl;
-				sleep(2500);
+				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
+				sleep(6000);
 			}
 			statistika(k.brojBodova, 4, true);
 		}

@@ -1,6 +1,8 @@
-#include "Varanje.h"
+#include "Varanje.h"
 #include <iostream>
 #include <fstream>
+
+
 int funkcijaKakoOdigrati(Korisnik k)
 {
 
@@ -76,7 +78,7 @@ bool varanjePriprema(Korisnik k)
 		k.ucitajKljuc(i);
 	else
 	{
-		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova, pa ne možete preuzeti kljuc" << std::endl;
+		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova, pa ne možete preuzeti kljuè." << std::endl;
 		sleep(3000);
 	}
 	return true;
