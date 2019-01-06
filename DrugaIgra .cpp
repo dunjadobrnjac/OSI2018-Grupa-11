@@ -72,13 +72,13 @@ void igrajDruguIgru(int& bodovi,Korisnik k)
 	ucitajPitanja(nizPitanja, rezim);
 	RandomPitanjee(cuvar);
 
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		do
 		{
-			std::cout << "=======================================================" << std::endl;
+			std::cout << "=======================================================================" << std::endl;
 			std::cout << nizPitanja[cuvar[i]].pitanja << std::endl;
-			std::cout << "=======================================================" << std::endl;
+			std::cout << "=======================================================================" << std::endl;
 			std::cout << "Unesite odgovor (a, b ili c):" << std::endl;
 			std::cin >> odgovor;
 			system("cls");
