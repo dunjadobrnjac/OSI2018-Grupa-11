@@ -224,6 +224,29 @@ void Korisnik::upisKljuca(int igra,int t)
 	}
 }
 
+void Korisnik::otkaziIgru(int broj)
+{
+	std::ofstream datoteka;
+	if (broj == 1)
+		datoteka.open("trajanjePrvaIgra.txt");
+	else if (broj == 2)
+		datoteka.open("trajanjeDrugaIgra.txt");
+	else if (broj == 3)
+		datoteka.open("trajanjeTrecaIgra.txt");
+	else
+		datoteka.open("trajanjeCetvrtaIgra.txt");
+	if (datoteka.is_open())
+	{
+		datoteka.seekp(0, std::ios::beg);
+		datoteka << '0' << std::endl;
+		datoteka << '0';
+		datoteka.close();
+	}
+	std::cout << u8"Igra je uspješno otkazana!" << std::endl;
+	Sleep(3000);
+}
+
+
 bool Korisnik::provjeraKljuca(int igra)
 {
 	std::ifstream unos;

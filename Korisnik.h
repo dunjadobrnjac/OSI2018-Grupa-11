@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 
 class Korisnik
@@ -11,12 +12,13 @@ public:
 	const char* getIme()const;
     const  int& getBrUlaza()const;
 	bool dajKljuc(int,int);
+	bool provjeraKljuca(int);
 	void upisiBodove()const;
 	void ispisiBodove()const;
 	void ucitajBodove();
 	void ucitajKljuc(int);
 	void upisKljuca(int,int);
-	bool provjeraKljuca(int);
+	void otkaziIgru(int);
 	int brojBodova;
 	int brojUlozenihBodova;
 private:
