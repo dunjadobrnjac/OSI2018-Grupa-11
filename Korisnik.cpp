@@ -86,7 +86,7 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 		//system("pause");
 	}
 	system("cls");
-	std::cout << u8"Unesite traženi kljuc: ";
+	std::cout << u8"Unesite traženi kljuè: ";
 	char s1[20];
 	std::cin >> s1;
 	if (strcmp(s1, s) == 0)
