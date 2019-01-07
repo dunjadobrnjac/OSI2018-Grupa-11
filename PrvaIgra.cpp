@@ -29,4 +29,10 @@ void igrajPrvuIgru(int& bodovi, Korisnik k)
 	k.brojBodova = bodovi;
 	k.upisiBodove();
 
+	/*//STATISTIKA
+	char karakteri[22];
+	for (int i = 0; i < 22; i++)karakteri[i] = 0;
+	Stats neki = { 1, Vrijeme() , osvojeniBodoviRezultat };
+	upisiUTxtFajl(neki.brojIgre, neki.brojBodova, neki.datum);
+	smjestiNaPravoMjesto(neki.brojIgre);*/
 }
