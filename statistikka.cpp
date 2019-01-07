@@ -180,10 +180,6 @@ void ispisStatistike(int brojIgre)
 {
 	system("cls");
 	std::string prazanString;
-	prazanString[17] = '/' ;
-	prazanString[18] = '/';
-	prazanString[19] = '/';
-	std::cout << prazanString<<std::endl;
 	int brojLinija = 0;
 	std::ifstream datoteka1;
 	if (brojIgre == 1)
