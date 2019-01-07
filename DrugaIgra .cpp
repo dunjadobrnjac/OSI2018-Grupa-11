@@ -63,9 +63,9 @@ void RandomPitanjee(int cuvar[])
 }
 void igrajDruguIgru(int& bodovi,Korisnik k)
 {
-	int pomocna = bodovi;
-	pocetak2:
 	srand(time(NULL));
+	pocetak2:
+	int pomocna = bodovi;
 	std::string odgovor;
 	int cuvar[BP];
 	Pitanje nizPitanja[BP];
