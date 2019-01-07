@@ -5,6 +5,7 @@
 #include <fstream>
 #include <cmath>
 #include <windows.h>
+#include "Statistikka.h"
 
 using namespace std;
 
@@ -154,7 +155,8 @@ string ucitajTip(string putanja, string rijec)
 void vjesala(int& bodovi, Korisnik k)
 {
 	srand(time(0));//da bi se trazena rijec uvijek nasumicno nasla
-	pocetak4:
+pocetak4:
+	int pomocna = bodovi;
 	string rijecZaPogoditi;
 	string pokusaji;
 	int rezim = funkcijaKakoOdigrati(k);
@@ -230,6 +232,13 @@ void vjesala(int& bodovi, Korisnik k)
 	}
 	k.brojBodova = bodovi;
 	k.upisiBodove();
+
+	//Za statistiku:
+	char karakteri[22];
+	for (int i = 0; i < 22; i++)karakteri[i] = 0;
+	Stats neki = { 4, Vrijeme() , bodovi - pomocna };
+	upisiUTxtFajl(neki.brojIgre, neki.brojBodova, neki.datum);
+	smjestiNaPravoMjesto(neki.brojIgre);
 
 	std::string odg;
 	std::cout << u8"Da li želite opet igrati? (Da/Ne)" << std::endl;
