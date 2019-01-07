@@ -8,6 +8,7 @@
 #include <ctime>
 #include "DrugaIgra.h"
 #include "Varanje.h"
+#include "Statistikka.h"
 #include <cstdlib>
 #include <cstdio>
 #define BP 15 // broj pitanja ovdje promjeniti ako se stave nova
@@ -62,6 +63,7 @@ void RandomPitanjee(int cuvar[])
 }
 void igrajDruguIgru(int& bodovi,Korisnik k)
 {
+	int pomocna = bodovi;
 	pocetak2:
 	srand(time(NULL));
 	std::string odgovor;
@@ -109,4 +111,10 @@ void igrajDruguIgru(int& bodovi,Korisnik k)
 	}
 	k.brojBodova = bodovi;
 	k.upisiBodove();
+	//Za statistiku
+	char karakteri[22];
+	for (int i = 0; i < 22; i++)karakteri[i] = 0;
+	Stats neki = { 2, Vrijeme() , bodovi-pomocna };
+	upisiUTxtFajl(neki.brojIgre, neki.brojBodova, neki.datum);
+	smjestiNaPravoMjesto(neki.brojIgre);
 }
