@@ -193,41 +193,46 @@ void ispisStatistike(int brojIgre)
 	if (datoteka1.is_open())
 	{
 		while (getline(datoteka1, prazanString))
-			brojLinija++;
+			if (prazanString != "")
+				brojLinija++;
 		datoteka1.close();
 	}
-	std::cout << "BROJ LINIJA JE" << brojLinija << std::endl;
 	if (brojLinija > 10)
 		brojLinija = 10;
+	std::cout << "==============================================" << std::endl;
 	std::ifstream datoteka;
 	if (brojIgre == 1)
 	{
 		datoteka.open("StatistikaZaPrvuIgru.txt");
-		std::cout << "STATISTIKA ZA PRVU IGRU:" << std::endl << std::endl;
+		std::cout << "STATISTIKA ZA PRVU IGRU:" << std::endl;
 	}
 	else if (brojIgre == 2)
 	{
 		datoteka.open("StatistikaZaDruguIgru.txt");
-		std::cout << "STATISTIKA ZA DRUGU IGRU:" << std::endl << std::endl;
+		std::cout << "STATISTIKA ZA DRUGU IGRU:" << std::endl;
 	}
 	else if (brojIgre == 3)
 	{
 		datoteka.open("StatistikaZaTrecuIgru.txt");
-		std::cout << u8"STATISTIKA ZA TREĆU IGRU:" << std::endl << std::endl;
+		std::cout << u8"STATISTIKA ZA TREĆU IGRU:" << std::endl;
 	}
 	else if (brojIgre == 4)
 	{
 		datoteka.open("StatistikaZaCetvrtuIgru.txt");
-		std::cout << u8"STATISTIKA ZA ČETVRTU IGRU:" << std::endl << std::endl;
+		std::cout << u8"STATISTIKA ZA ČETVRTU IGRU:" << std::endl;
 	}
-	std::string nekiString = "";
+	std::cout << "==============================================" << std::endl;
+	std::cout << "Najbolji rezultati:" << std::endl;
+	std::cout << "=============================================="<<std::endl;
 	if (brojLinija == 0)
 	{
 		std::cout << u8"JOŠ UVIJEK NISTE IGRALI OVU IGRU"<<std::endl;
+		std::cout << "==============================================" << std::endl;
 		Sleep(7000);
 		return;
 	}
 	Stats *niz = new Stats[brojLinija];
+	std::string nekiString = "";
 	if (datoteka.is_open())
 	{
 		for (int i = 0; i < brojLinija;++i)
@@ -247,11 +252,16 @@ void ispisStatistike(int brojIgre)
 			noviString.empty();
 			niz[i].brojBodova = std::stoi(noviString);
 			nekiString.empty();
-			if(i<9)
-				std::cout <<" "<< i+1 << ".-->  " << niz[i].brojIgre << ". igra  " << niz[i].datum << "  " << niz[i].brojBodova << std::endl;
+			if (i < 9)
+			{
+				std::cout << " " << i + 1 << ".-->  " << niz[i].brojIgre << ". igra  " << niz[i].datum << "  " << niz[i].brojBodova << std::endl;
+			}
 			else
 				std::cout << i + 1 << ".-->  " << niz[i].brojIgre << ". igra  " << niz[i].datum << "  " << niz[i].brojBodova << std::endl;
+			if (i < brojLinija - 1)
+				std::cout << " ---------------------------------------------" << std::endl;
 		}
+		std::cout << "==============================================" << std::endl;
 	}
 	Sleep(7000);
 }
@@ -305,17 +315,17 @@ void pisiUCSV()
 			else if (brojIgre == 3)
 			{
 				datoteka2.open("StatistikaZaTrecuIgru.txt");
-				datoteka << u8"TREĆA IGRA - TOP 10:" << std::endl << std::endl;
+				datoteka << u8"TRECA IGRA - TOP 10:" << std::endl << std::endl;
 			}
 			else if (brojIgre == 4)
 			{
 				datoteka2.open("StatistikaZaCetvrtuIgru.txt");
-				datoteka << u8"ČETVRTA IGRA - TOP 10: " << std::endl << std::endl;
+				datoteka << u8"CETVRTA IGRA - TOP 10: " << std::endl << std::endl;
 			}
 			std::string nekiString = "";
 			if (brojLinija == 0)
 			{
-				datoteka << u8"JOŠ UVIJEK NISTE IGRALI OVU IGRU" << std::endl << std::endl;
+				datoteka << u8"JOS UVIJEK NISTE IGRALI OVU IGRU" << std::endl << std::endl;
 
 			}
 			else
