@@ -1,14 +1,15 @@
 ﻿#pragma once
 #include "Korisnik.h"
+#include "Statistikka.h"
 #include <iostream>
 #include <fstream>
-#include <cstdlib>  // sadrzi random funkciju - stalno vraca isti broj 
-#include <time.h>   // zato treba i ova koja ima srand
-#include <string>  // sl sve tri biblioteke su zbog š,č,đ,.. valjdaa
+#include <cstdlib>
+#include <time.h>
+#include <string> 
 #include <cstdio>
 #include <Windows.h>
 
 
-void igrajPrvuIgru(int&,Korisnik);
-int prvaIgraPrava(int &, int&);
-int prvaIgraVaranje(int &,int&);
+void igrajPrvuIgru(int&, Korisnik);
+int prvaIgraPrava(int &, int&, Korisnik);
+int prvaIgraVaranje(int &, int&, Korisnik);

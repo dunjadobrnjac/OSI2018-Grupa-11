@@ -1,6 +1,6 @@
 ﻿#include "PrvaIgra.h"
 
-int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi)
+int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi, Korisnik k)
 {
 	int odluka;
 	while (true)
@@ -10,6 +10,7 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi)
 		int broj;
 		int indeks = 0;
 		int brojPokusaja = 0;
+		int osvojeniBodoviPrva = 0;
 		bool postoji, neispravan, omoguciUpis;
 		std::string odgovor;
 
@@ -69,6 +70,7 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi)
 		{
 			std::cout << u8" Čestitamo! Pogodili ste broj." << std::endl;
 			std::cout << "======================================================" << std::endl;
+			osvojeniBodoviPrva = 100 / brojPokusaja;
 			osvojeniBodovi += 100 / brojPokusaja;
 		}
 		else if (brojPokusaja == 5)
@@ -76,6 +78,17 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi)
 			std::cout << u8"--> Nemate više pokušaja." << std::endl;
 			std::cout << "======================================================" << std::endl;
 		}
+
+		k.brojBodova = osvojeniBodovi;
+		k.upisiBodove();
+
+		//STATISTIKA
+		char karakteri[22];
+		for (int i = 0; i < 22; i++)
+			karakteri[i] = 0;
+		Stats neki = { 1, Vrijeme() , osvojeniBodoviPrva };
+		upisiUTxtFajl(neki.brojIgre, neki.brojBodova, neki.datum);
+		smjestiNaPravoMjesto(neki.brojIgre);
 
 		while (true)	// pitanje hoce li ponovo igrati
 		{
