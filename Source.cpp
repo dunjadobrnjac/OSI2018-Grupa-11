@@ -35,7 +35,6 @@ int main()
 		if (k.getBrUlaza() == 0)
 		{
 			std::cin >> k;
-			std::cout << k;
 		}
 		else
 		{
@@ -74,29 +73,33 @@ int main()
 		}
 		system("cls");
 	}
-
-
+	else
+		std::cout << "Pozdrav " << k.getIme() << "!\n" << std::endl;
 
 	int brojIgre;
 	while (true)
 	{
-		pocetak:
+	pocetak:
 		k.ucitajBodove();
 		k.ispisiBodove();
 	
-		std::cout << u8"\n 1 --> Pogaðanje sluèajnog broja" << std::endl;
+		std::cout << "\n\n========================================================" << std::endl;
+		std::cout << "NA RASPOLAGANJU SU VAM SLJEDECE OPCIJE:" << std::endl;
+		std::cout << "--------------------------------------------------------" << std::endl;
+		std::cout << u8" 1 --> Pogaðanje sluèajnog broja" << std::endl;
 		std::cout << " 2 --> Kviz" << std::endl;
 		std::cout << " 3 --> Loto " << std::endl;
 		std::cout << u8" 4 --> Vješala" << std::endl;
-		std::cout << " 5 --> Prikaz statistike" << std::endl;
-		std::cout << u8" 6 --> Kupovina/preuzimanje kljuèa" << std::endl;
-		std::cout << " 7 --> Otkazivanje igre" << std::endl;
-		std::cout << u8" 8 --> Stvaranje novog .csv fajla sa top 10 rezultatima"<<std::endl;
-		std::cout << u8" 9 --> Izlaz iz igrice\n"<<std::endl;
-		std::cout << u8"Unesite odgovarajuci broj: ";
+		std::cout << " 5 --> Kupovina/preuzimanje kljuèa" << std::endl;
+		std::cout << u8" 6 --> Prikaz statistike" << std::endl;
+		std::cout << " 7 --> Eksport CSV fajla" << std::endl;
+		std::cout << u8" 8 --> Otkazivanje igre"<<std::endl;
+		std::cout << u8" 9 --> Izlaz iz igrice"<<std::endl;
+		std::cout << "========================================================\n" << std::endl;
+		std::cout << u8"Unesite zeljenu opciju: ";
 		while (!(std::cin >> brojIgre) || std::cin.get() != '\n')
 		{
-			std::cout << "--> Unos nije validan!\n--> Unesite odgovarajuci broj ponovo: ";
+			std::cout << "----> Unos nije validan!\nUnesite zeljenu opciju: ";
 			std::cin.clear();
 			std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 		}
@@ -109,10 +112,8 @@ int main()
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
 				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
-				sleep(6000);
+				sleep(4500);
 			}
-			//statistika(k.brojBodova, 1, true);
-
 		}
 		else if (brojIgre == 2)
 		{
@@ -122,9 +123,8 @@ int main()
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
 				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
-				sleep(6000);
+				sleep(4500);
 			}
-			//statistika(k.brojBodova, 2, true);
 		}
 		else if (brojIgre == 3)
 		{
@@ -133,17 +133,15 @@ int main()
 			if (k.provjeraKljuca(3))
 			{
 				std::cout << u8"Ulaz u igru je koštao 100 bodova"<<std::endl;
-				sleep(3000);
+				sleep(2000);
 				lotoIgra(&pomocna, &k.brojBodova, &loto, k);
-				k.brojBodova -= 100;
 			}
 			else
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
 				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
-				sleep(6000);
+				sleep(4500);
 			}
-			//statistika(k.brojBodova, 3, true);
 		}
 		else if (brojIgre == 4)
 		{
@@ -153,39 +151,62 @@ int main()
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
 				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
-				sleep(6000);
+				sleep(4500);
 			}
-			//statistika(k.brojBodova, 4, true);
-		}
-		else if (brojIgre == 5)
-		{
-			std::cout << u8"Za koju igru želite prikaz statistike (1/2/3/4) ?";
-			int broj;
-			std::cin >> broj;
-			ispisStatistike(broj);
-			//statistika(k.brojBodova, broj,false);
-			//Sleep(7000); // prikazuje statistiku 7 s
 		}
 		else if (brojIgre == 6)
 		{
+			int broj;
+			std::cout << u8"Za koju igru želite prikaz statistike (1/2/3/4) ?"<<std::endl;
+		tu:
+			std::cout << "--> ";
+			while (!(std::cin >> broj) || std::cin.get() != '\n')
+			{
+				std::cout << "----> Unos nije validan! Unesite broj igre ponovo " << std::endl;
+				std::cout << "--> ";
+				std::cin.clear();
+				std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // zabrana unosenja chakova i slova
+			}
+			if (broj < 1 || broj > 4)
+			{
+				std::cout << "----> Niste unijeli odgovarajuci broj! " << std::endl;
+				goto tu;
+			}
+			ispisStatistike(broj);
+		}
+		else if (brojIgre == 5)
+		{
 			bool l = varanjePriprema(k);
 		}
-		else if (brojIgre == 7)
+		else if (brojIgre == 8)
 		{
-			std::cout << u8" Koju igru želite da otkažete (1/2/3/4)?" << std::endl;
-			std::cout << "--> ";
 			int broj;
-			std::cin >> broj;
+			std::cout << u8" Koju igru želite da otkažete (1/2/3/4)?" << std::endl;
+		ovdje:
+			std::cout << "--> ";
+			while (!(std::cin >> broj) || std::cin.get() != '\n')
+			{
+				std::cout << "----> Unos nije validan! Unesite broj igre ponovo " << std::endl;
+				std::cout << "--> ";
+				std::cin.clear();
+				std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // zabrana unosenja chakova i slova
+			}
+			if (broj < 1 || broj > 4)
+			{
+				std::cout << "----> Niste unijeli odgovarajuci broj! " << std::endl;
+				goto ovdje;
+			}
 			k.otkaziIgru(broj);
 		}
-		else if (brojIgre == 8)
+		else if (brojIgre == 7)
 		{
 			pisiUCSV();
 		}
 		else if (brojIgre == 9)
 		{
 			std::string odgovor;
-			std::cout << "Da li ste sigurni da želite izaci iz platforme za igre?" << std::endl;
+			std::cout << "Da li ste sigurni da želite izaci iz platforme za igre? (Da/Ne)" << std::endl;
+			std::cout << "--> ";
 			while (true)
 			{
 				std::cin >> odgovor;
@@ -200,7 +221,7 @@ int main()
 			{
 				system("cls");
 				std::cout << u8"Hvala na igranju, dovidenja!!!" << std::endl;
-				sleep(3000);
+				sleep(1500);
 				break;
 			}
 			else
@@ -209,9 +230,6 @@ int main()
 				goto pocetak;
 			}
 		}
-		else
-			std::cout << "Niste unijeli validan broj " << std::endl;
-		system("cls");
 	}
 	system("pause"); // omogucava da prozor ostane otvoren
 	return 0;
