@@ -5,8 +5,8 @@
 class Korisnik
 {
 public:
-	Korisnik(int =10,int =0);
-	~Korisnik();
+	Korisnik(int = 10, int = 0);
+
 	friend std::istream& operator>>(std::istream&, Korisnik&);
 	friend std::ostream& operator<<(std::ostream&, const Korisnik&);
 	const char* getIme()const;

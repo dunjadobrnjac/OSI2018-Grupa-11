@@ -12,12 +12,6 @@ Korisnik::Korisnik(int br1, int br2)
 	brojUlozenihBodova = 0;
 }
 
-Korisnik::~Korisnik()
-{
-	delete[] ime;
-	ime = nullptr;
-}
-
 const char* Korisnik::getIme() const
 {
 	char *s = new char[20];
@@ -80,12 +74,15 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 		std::ofstream red1;
 		red1.open("redKljucevaPoTrajanjima.txt"); red1 << r[0] << "\n" << r[1] << "\n" << r[2] << "\n" << r[3];
 		red1.close();
+		std::cout << "========================================================" << std::endl;
 		std::cout << s;
 		std::cout << std::endl << u8"Molimo Vas da kopirate kljuè, imate 7 sekundi!" << std::endl;
+		std::cout << "========================================================" << std::endl;
 		Sleep(7000);
 		//system("pause");
 	}
 	system("cls");
+	std::cout << "========================================================" << std::endl;
 	std::cout << u8"Unesite traženi kljuè: ";
 	char s1[20];
 	std::cin >> s1;
@@ -141,7 +138,6 @@ void Korisnik::upisiBodove()const
 void Korisnik::ispisiBodove() const
 {
 	std::cout << u8"Vaš trenutni broj bodova je: " << brojBodova;
-	//std::cout << u8"\nVaš uloženi broj bodova je: " << brojUlozenihBodova << std::endl;
 }
 
 void Korisnik::ucitajBodove()
@@ -168,8 +164,9 @@ void Korisnik::ucitajKljuc(int igra)
 	int t;
 	if (igra != 4)
 	{
+		std::cout << "========================================================" << std::endl;
 		std::cout << u8"Odaberite trajanje kljuèa:\n";
-		std::cout << "1 -> 1h\n" << "2 -> 1 dan\n" << "3 -> 7 dana\n";
+		std::cout << "1 -> 1 sat\n" << "2 -> 1 dan\n" << "3 -> 7 dana\n";
 	ovdje:
 		std::cout << "--> ";
 		while (!(std::cin >> t) || std::cin.get() != '\n')
@@ -205,10 +202,17 @@ void Korisnik::ucitajKljuc(int igra)
 			std::cout << u8"neograniceno." << std::endl;
 			break;
 		}
+		std::cout << "========================================================" << std::endl;
+		Sleep(1600);
+		system("cls");
 	}
 	else
+	{
 		std::cout << "Nemate pristup " << igra << u8". igri, Vaš kljuè nije validan!" << std::endl;
-	Sleep(4000);
+		std::cout << "========================================================" << std::endl;
+		Sleep(1600);
+		system("cls");
+	}
 }
 
 void Korisnik::upisKljuca(int igra,int t)
@@ -244,24 +248,36 @@ void Korisnik::upisKljuca(int igra,int t)
 
 void Korisnik::otkaziIgru(int broj)
 {
-	std::ofstream datoteka;
-	if (broj == 1)
-		datoteka.open("trajanjePrvaIgra.txt");
-	else if (broj == 2)
-		datoteka.open("trajanjeDrugaIgra.txt");
-	else if (broj == 3)
-		datoteka.open("trajanjeTrecaIgra.txt");
-	else
-		datoteka.open("trajanjeCetvrtaIgra.txt");
-	if (datoteka.is_open())
+	if (provjeraKljuca(broj))
 	{
-		datoteka.seekp(0, std::ios::beg);
-		datoteka << '0' << std::endl;
-		datoteka << '0';
-		datoteka.close();
+		std::ofstream datoteka;
+		if (broj == 1)
+			datoteka.open("trajanjePrvaIgra.txt");
+		else if (broj == 2)
+			datoteka.open("trajanjeDrugaIgra.txt");
+		else if (broj == 3)
+			datoteka.open("trajanjeTrecaIgra.txt");
+		else
+			datoteka.open("trajanjeCetvrtaIgra.txt");
+		if (datoteka.is_open())
+		{
+			datoteka.seekp(0, std::ios::beg);
+			datoteka << '0' << std::endl;
+			datoteka << '0';
+			datoteka.close();
+		}
+		std::cout << "========================================================" << std::endl;
+		std::cout << u8"Igra je uspješno otkazana!" << std::endl;
+		std::cout << "========================================================" << std::endl;
+		Sleep(1600);
 	}
-	std::cout << u8"Igra je uspješno otkazana!" << std::endl;
-	Sleep(3000);
+	else
+	{
+		std::cout << "========================================================" << std::endl;
+		std::cout << "Igra nije bila aktivirana!" << std::endl;
+		std::cout << "========================================================" << std::endl;
+		Sleep(1600);
+	}
 }
 
 
@@ -304,17 +320,13 @@ bool Korisnik::provjeraKljuca(int igra)
 			sek = 7 * 24 * 3600;
 			break;
 		default:
-			std::cout << u8"Greška u unosu trajanja kljuèa!" << std::endl;
+			std::cout << u8"========================================================\nGreška u unosu trajanja kljuèa!\n========================================================" << std::endl;
 		}
-		//std::cout << trajanje << " " << sek;
 		time_t sad,uneseno;
 		unos >> uneseno;
 		time(&sad);
 		if (difftime(sad,uneseno) < sek)
-		{
-			//std::cout << "Razlika u sekundama je " << difftime(sad, unijeto)<<"\n";
 			return true;
-		}
 		unos.close();
 		return false;
 	}
