@@ -19,7 +19,7 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi, Korisnik k)
 		do
 		{
 
-			do //petlja za provjeru uslova prilikom unosenja brojeva
+			do
 			{
 				std::cout << "======================================================" << std::endl;
 				std::cout << " Unesi broj od 0 do 100 : ";
@@ -27,7 +27,7 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi, Korisnik k)
 				{
 					std::cout << "--> Unos nije validan! Unesite broj ponovo: ";
 					std::cin.clear();
-					std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // zabrana unosenja chakova i slova
+					std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 				}
 				postoji = false;
 				for (int j = 0; j <= indeks; ++j)
@@ -56,10 +56,10 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi, Korisnik k)
 				}
 				if (broj < 0 || broj>100)
 					std::cout << "--> Uneseni broj nije u dozvoljenom opsegu. " << std::endl;
-			} while (broj < 0 || broj > 100 || postoji || !omoguciUpis);					//ogranicenje opsega
+			} while (broj < 0 || broj > 100 || postoji || !omoguciUpis);					
 
-			if (random < broj)																//petlja za pogadjanje brojeva
-				std::cout << u8"--> Broj koji tražite je manji od unesenog broja.\n";			// moze i <<std::endl- prelazak u novi red
+			if (random < broj)																
+				std::cout << u8"--> Broj koji tražite je manji od unesenog broja.\n";
 			else if (random > broj)
 				std::cout << u8"--> Broj koji tražite je veći od unesenog broja.\n";
 			++brojPokusaja;
@@ -82,7 +82,6 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi, Korisnik k)
 		k.brojBodova = osvojeniBodovi;
 		k.upisiBodove();
 
-		//STATISTIKA
 		char karakteri[22];
 		for (int i = 0; i < 22; i++)
 			karakteri[i] = 0;
@@ -90,17 +89,20 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi, Korisnik k)
 		upisiUTxtFajl(neki.brojIgre, neki.brojBodova, neki.datum);
 		smjestiNaPravoMjesto(neki.brojIgre);
 
-		while (true)	// pitanje hoce li ponovo igrati
+		while (true)
 		{
-			std::cout << u8" Da li želite ponovo da igrate? (Da/Ne)? ";
+			std::cout << u8" Da li želite ponovo da igrate? (Da/Ne) " << std::endl;
+		tamo:
+			std::cout << "--> ";
 			std::cin >> odgovor;
-
 			if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0
 				|| odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
 				break;
 			else
+			{
 				std::cout << " Unesite 'Da' ili 'Ne'...\n";
-
+				goto tamo;
+			}
 		}
 
 		delete[] nizUnesenih;
@@ -114,7 +116,8 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi, Korisnik k)
 		if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("nE") == 0 || odgovor.compare("NE") == 0)
 		{
 			std::cout << " Hvala na igranju!" << std::endl;
-			Sleep(1500);
+			std::cout << "======================================================" << std::endl;
+			Sleep(1000);
 			odluka = 0;
 			break;
 		}
