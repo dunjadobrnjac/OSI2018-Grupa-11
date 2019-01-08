@@ -11,7 +11,7 @@
 #include "Statistikka.h"
 #include <cstdlib>
 #include <cstdio>
-#define BP 15 // broj pitanja ovdje promjeniti ako se stave nova
+#define BP 32 // broj pitanja ovdje promjeniti ako se stave nova
 
 struct Pitanje
 {
