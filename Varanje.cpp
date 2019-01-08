@@ -40,8 +40,20 @@ bool varanjePriprema(Korisnik k)
 {
 	int i = 0, datoteckiInt = 0;
 	std::cout << u8"Za koju igricu želite kupiti/preuzeti kljuè? (1/2/3/4)" << std::endl;
+ovdje:
 	std::cout << "--> ";
-	std::cin >> i;
+	while (!(std::cin >> i) || std::cin.get() != '\n')
+	{
+		std::cout << "----> Unos nije validan! Unesite broj igre ponovo " << std::endl;
+		std::cout << "--> ";
+		std::cin.clear();
+		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // zabrana unosenja chakova i slova
+	}
+	if (i < 1 || i > 4)
+	{
+		std::cout << "----> Niste unijeli odgovarajuci broj! " << std::endl;
+		goto ovdje;
+	}
 	std::ifstream datoteka;
 	datoteka.open("prviPogodak.txt");
 	if (datoteka.is_open())
@@ -78,7 +90,7 @@ bool varanjePriprema(Korisnik k)
 	else
 	{
 		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova, pa ne možete preuzeti kljuè!" << std::endl;
-		sleep(4000);
+		sleep(2000);
 	}
 	return true;
 }
