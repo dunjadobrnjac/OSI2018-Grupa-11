@@ -166,10 +166,27 @@ std::ostream& operator<<(std::ostream& output, const Korisnik& k)
 void Korisnik::ucitajKljuc(int igra)
 {
 	int t;
-	std::cout << u8"Odaberite trajanje kljuèa:\n";
-	std::cout<< "1 -> 1h\n" << "2 -> 1 dan\n" << "3 -> 7 dana\n"; 
-	std::cout << "--> ";
-	std::cin >> t;
+	if (igra != 4)
+	{
+		std::cout << u8"Odaberite trajanje kljuèa:\n";
+		std::cout << "1 -> 1h\n" << "2 -> 1 dan\n" << "3 -> 7 dana\n";
+	ovdje:
+		std::cout << "--> ";
+		while (!(std::cin >> t) || std::cin.get() != '\n')
+		{
+			std::cout << "----> Unos nije validan! Unesite trajanje ponovo " << std::endl;
+			std::cout << "--> ";
+			std::cin.clear();
+			std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // zabrana unosenja chakova i slova
+		}
+		if (t < 1 || t>3)
+		{
+			std::cout << "----> Niste unijeli odgovarajuci broj! " << std::endl;
+			goto ovdje;
+		}
+	}
+	else
+		t = 4;
 	if (dajKljuc(t, igra))
 	{
 		std::cout << u8"Možete igrati " << igra << ". igru ";
@@ -191,6 +208,7 @@ void Korisnik::ucitajKljuc(int igra)
 	}
 	else
 		std::cout << "Nemate pristup " << igra << u8". igri, Vaš kljuè nije validan!" << std::endl;
+	Sleep(4000);
 }
 
 void Korisnik::upisKljuca(int igra,int t)
