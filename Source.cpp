@@ -6,10 +6,6 @@
 #include "Korisnik.h"
 #include "Statistikka.h"
 #include "Varanje.h"
-#include <iostream>
-#include <cstdio>
-#include <Windows.h>
-
 
 int main()
 {
@@ -59,7 +55,6 @@ int main()
 		{
 			k.ucitajKljuc(1);
 			igrajPrvuIgru(k.brojBodova, k);
-			//statistika(k.brojBodova, 1, true);
 		}
 		else
 			if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0)
@@ -111,8 +106,8 @@ int main()
 			else
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 6)." << std::endl;
-				sleep(4500);
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
+				sleep(4000);
 			}
 		}
 		else if (brojIgre == 2)
@@ -122,8 +117,8 @@ int main()
 			else
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 6)." << std::endl;
-				sleep(4500);
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
+				sleep(4000);
 			}
 		}
 		else if (brojIgre == 3)
@@ -139,8 +134,8 @@ int main()
 			else
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 6)." << std::endl;
-				sleep(4500);
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
+				sleep(4000);
 			}
 		}
 		else if (brojIgre == 4)
@@ -150,8 +145,8 @@ int main()
 			else
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 6)." << std::endl;
-				sleep(4500);
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
+				sleep(4000);
 			}
 		}
 		else if (brojIgre == 6)
