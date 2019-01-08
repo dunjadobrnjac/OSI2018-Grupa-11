@@ -225,6 +225,7 @@ int main()
 				goto pocetak;
 			}
 		}
+		system("cls");
 	}
 	system("pause"); // omogucava da prozor ostane otvoren
 	return 0;
