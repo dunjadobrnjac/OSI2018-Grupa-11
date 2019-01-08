@@ -1,6 +1,7 @@
-﻿#include "TrecaIgra.h"
+﻿#include "TrecaIgra.h"
 #include "Statistikka.h"
 #include "Varanje.h"
+
 int isTheSame(int niz[], int broj)
 {
 	for (int i = 0; i < 7; i++)
@@ -129,6 +130,7 @@ void ispisiRezultat(int loto[], int odigrani[], int broj, Korisnik k)
 	std::cout << "==================================" << std::endl;
 	//Za klasu korisnik
 	k.brojBodova += osvojeniBodoviRezultat;
+	k.brojBodova -= 100;
 	//std::cout << k.brojBodova;
 	k.upisiBodove();
 	std::cout << std::endl;
