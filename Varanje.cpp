@@ -86,7 +86,12 @@ ovdje:
 		datotekka.close();
 	}
 	if (datoteckiInt)
-		k.ucitajKljuc(i);
+	{
+		if (k.provjeraKljuca(i))
+			std::cout << "Imate važeæi kljuè i možete igrati igru. Ako želite novi kljuè, prvo otkažite igru" << std::endl;
+		else
+			k.ucitajKljuc(i);
+	}
 	else
 	{
 		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova, pa ne možete preuzeti kljuè!" << std::endl;
