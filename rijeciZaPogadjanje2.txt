@@ -10,3 +10,5 @@ STRUJA imenica
 ZEBRA imenica
 JAKNA imenica
 PANTALONE imenica
+MATEMATIKA imenica
+FIZIKA imenica
