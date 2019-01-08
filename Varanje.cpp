@@ -17,28 +17,19 @@ int funkcijaKakoOdigrati(Korisnik k)
 		datoteka >> referentniBrojBodova;
 		datoteka.close();
 	}
-	/*int brojIgranja = 0;
-	if (brojIgranja % 20 < 18)
-	{*/
 	if (k.brojBodova > referentniBrojBodova)
-		return 0;//sigurno gubi
+		return 0;
 	else if ((k.brojBodova < referentniBrojBodova) && (k.brojBodova > (referentniBrojBodova*0.6)))
-		return 1;//prepusten sreci
+		return 1;
 	else
-		return 2;//sigurno mora pogoditi
-	/*}
-	else
-	{
-		if (k.brojBodova < 0.7*referentniBrojBodova)
-			return 1;//prepusten sreci
-		else
-			return 0;//sigurno gubi
-	}*/
+		return 2;
 }
 
 bool varanjePriprema(Korisnik k)
 {
-	int i = 0, datoteckiInt = 0;
+	int i = 0;
+	int datoteckiInt = 0;
+	std::cout << "========================================================" << std::endl;
 	std::cout << u8"Za koju igricu želite kupiti/preuzeti kljuè? (1/2/3/4)" << std::endl;
 ovdje:
 	std::cout << "--> ";
@@ -47,7 +38,7 @@ ovdje:
 		std::cout << "----> Unos nije validan! Unesite broj igre ponovo " << std::endl;
 		std::cout << "--> ";
 		std::cin.clear();
-		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // zabrana unosenja chakova i slova
+		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 	}
 	if (i < 1 || i > 4)
 	{
@@ -88,13 +79,20 @@ ovdje:
 	if (datoteckiInt)
 	{
 		if (k.provjeraKljuca(i))
-			std::cout << "Imate važeæi kljuè i možete igrati igru. Ako želite novi kljuè, prvo otkažite igru" << std::endl;
+		{
+			std::cout << "========================================================" << std::endl;
+			std::cout << "Imate važeæi kljuè i možete igrati igru.\nAko želite novi kljuè, prvo otkažite igru" << std::endl;
+			std::cout << "========================================================" << std::endl;
+			sleep(1500);
+		}
 		else
 			k.ucitajKljuc(i);
 	}
 	else
 	{
-		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova, pa ne možete preuzeti kljuè!" << std::endl;
+		std::cout << "========================================================" << std::endl;
+		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova,\npa ne možete preuzeti kljuè!" << std::endl;
+		std::cout << "========================================================" << std::endl;
 		sleep(2000);
 	}
 	return true;
