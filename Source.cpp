@@ -84,22 +84,22 @@ int main()
 		k.ispisiBodove();
 	
 		std::cout << "\n\n========================================================" << std::endl;
-		std::cout << "NA RASPOLAGANJU SU VAM SLJEDECE OPCIJE:" << std::endl;
+		std::cout << u8"NA RASPOLAGANJU SU VAM SLJEDEÆE OPCIJE:" << std::endl;
 		std::cout << "--------------------------------------------------------" << std::endl;
 		std::cout << u8" 1 --> Pogaðanje sluèajnog broja" << std::endl;
 		std::cout << " 2 --> Kviz" << std::endl;
 		std::cout << " 3 --> Loto " << std::endl;
 		std::cout << u8" 4 --> Vješala" << std::endl;
-		std::cout << " 5 --> Kupovina/preuzimanje kljuèa" << std::endl;
+		std::cout << u8" 5 --> Kupovina/preuzimanje kljuèa" << std::endl;
 		std::cout << u8" 6 --> Prikaz statistike" << std::endl;
 		std::cout << " 7 --> Eksport CSV fajla" << std::endl;
 		std::cout << u8" 8 --> Otkazivanje igre"<<std::endl;
 		std::cout << u8" 9 --> Izlaz iz igrice"<<std::endl;
 		std::cout << "========================================================\n" << std::endl;
-		std::cout << u8"Unesite zeljenu opciju: ";
+		std::cout << u8"Unesite željenu opciju: ";
 		while (!(std::cin >> brojIgre) || std::cin.get() != '\n')
 		{
-			std::cout << "----> Unos nije validan!\nUnesite zeljenu opciju: ";
+			std::cout << u8"----> Unos nije validan!\nUnesite željenu opciju: ";
 			std::cin.clear();
 			std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 		}
@@ -111,7 +111,7 @@ int main()
 			else
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 6)." << std::endl;
 				sleep(4500);
 			}
 		}
@@ -122,7 +122,7 @@ int main()
 			else
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 6)." << std::endl;
 				sleep(4500);
 			}
 		}
@@ -139,7 +139,7 @@ int main()
 			else
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 6)." << std::endl;
 				sleep(4500);
 			}
 		}
@@ -150,7 +150,7 @@ int main()
 			else
 			{
 				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru." << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa(opcija 6)." << std::endl;
+				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju u kupovina/preuzimanje kljuèa (opcija 6)." << std::endl;
 				sleep(4500);
 			}
 		}
@@ -169,7 +169,7 @@ int main()
 			}
 			if (broj < 1 || broj > 4)
 			{
-				std::cout << "----> Niste unijeli odgovarajuci broj! " << std::endl;
+				std::cout << u8"----> Niste unijeli odgovarajuæi broj! " << std::endl;
 				goto tu;
 			}
 			ispisStatistike(broj);
@@ -193,7 +193,7 @@ int main()
 			}
 			if (broj < 1 || broj > 4)
 			{
-				std::cout << "----> Niste unijeli odgovarajuci broj! " << std::endl;
+				std::cout << u8"----> Niste unijeli odgovarajuæi broj! " << std::endl;
 				goto ovdje;
 			}
 			k.otkaziIgru(broj);
@@ -205,7 +205,7 @@ int main()
 		else if (brojIgre == 9)
 		{
 			std::string odgovor;
-			std::cout << "Da li ste sigurni da želite izaci iz platforme za igre? (Da/Ne)" << std::endl;
+			std::cout << u8"Da li ste sigurni da želite izaæi iz platforme za igre? (Da/Ne)" << std::endl;
 			std::cout << "--> ";
 			while (true)
 			{
@@ -220,7 +220,7 @@ int main()
 			if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
 			{
 				system("cls");
-				std::cout << u8"Hvala na igranju, dovidenja!!!" << std::endl;
+				std::cout << u8"Hvala na igranju, doviðenja!!!" << std::endl;
 				sleep(1500);
 				break;
 			}
