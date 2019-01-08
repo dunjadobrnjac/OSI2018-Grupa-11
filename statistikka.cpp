@@ -7,13 +7,11 @@
 #include "TrecaIgra.h"
 
 
-
 std::string Vrijeme()
 {
 	std::string TrenutniDatum;
 	SYSTEMTIME time;
 	GetLocalTime(&time);
-	//(L"Time: %02d:%02d:%02d\n", time.wHour, time.wMinute, time.wSecond);
 	std::ofstream Temp;
 	Temp.open("Temp.txt");
 	if (Temp.is_open())
@@ -58,18 +56,10 @@ void upisiUTxtFajl(int igra, int bodovi, std::string vr)
 		Pisi << s.brojIgre << " ";
 		Pisi << s.datum << " ";
 		Pisi << s.brojBodova <<'b'<< std::endl;
-		//Pisi << s;
 		Pisi.close();
 	}
 	smjestiNaPravoMjesto(igra);
 }
-
-/*std::ostream& operator<<(std::ostream& izlaz, const Stats& s)
-{
-	izlaz << s.brojIgre << " ";
-	izlaz << s.datum << " ";
-	izlaz << s.brojBodova << 'b' << std::endl;
-}*/
 
 void smjestiNaPravoMjesto(int igra)
 {
@@ -91,7 +81,6 @@ void smjestiNaPravoMjesto(int igra)
 		datoteka1.close();
 	}
 	Stats* niz = new Stats[brojLinija];
-	//std::cout << brojLinija << std::endl;
 	for (int i = 0; i < brojLinija; i++)
 	{
 		niz[i].brojBodova = 0;
@@ -113,7 +102,6 @@ void smjestiNaPravoMjesto(int igra)
 	{
 		for (int i = 0; i < brojLinija;++i)
 		{
-			//datoteka >> niz[i].brojIgre >> niz[i].datum >> niz[i].brojBodova;
 			getline(datoteka, nekiString);
 			std::string noviString = "";
 			niz[i].brojIgre = nekiString[0] == '1' ? 1 : (nekiString[0] == '2' ? 2 : (nekiString[0] == '3' ? 3 : (nekiString[0] == '4' ? 4 : 5)));
@@ -134,8 +122,6 @@ void smjestiNaPravoMjesto(int igra)
 	SelectionSort(niz, brojLinija, igra);
 	/*for (int i = 0; i < brojLinija; i++)
 		upisiUTxtFajl(niz[i].brojIgre, niz[i].brojBodova, niz[i].datum);*/
-	/*for (int i = 0; i < brojLinija; ++i)
-		std::cout << niz[i].brojIgre << " " << niz[i].datum << " " << niz[i].brojBodova << std::endl;*/
 }
 
 void SelectionSort(Stats* niz, int n, int brojIgre)
@@ -237,7 +223,6 @@ void ispisStatistike(int brojIgre)
 	{
 		for (int i = 0; i < brojLinija;++i)
 		{
-			//datoteka >> niz[i].brojIgre >> niz[i].datum >> niz[i].brojBodova;
 			getline(datoteka, nekiString);
 			std::string noviString = "";
 			niz[i].brojIgre = nekiString[0] == '1' ? 1 : (nekiString[0] == '2' ? 2 : (nekiString[0] == '3' ? 3 : (nekiString[0] == '4' ? 4 : 5)));
@@ -273,7 +258,7 @@ void pisiUCSV()
 	string += Vrijeme();
 	string += ".csv";
 	std::cout << string << std::endl;
-	Sleep(2000);
+	Sleep(1300);
 	std::ofstream datoteka;
 	datoteka.open("StatistikaCsv.csv");
 	if (datoteka.is_open())
@@ -294,11 +279,10 @@ void pisiUCSV()
 			if (datoteka1.is_open())
 			{
 				while (getline(datoteka1, prazanString))
-					brojLinija++;
+					if(prazanString!="")
+						brojLinija++;
 				datoteka1.close();
 			}
-			//std::cout << "Broj linija" << brojLinija << std::endl;
-			//system("pause");
 			std::ifstream datoteka2;
 			if (brojLinija > 10)
 				brojLinija = 10;
@@ -336,7 +320,6 @@ void pisiUCSV()
 				{
 					for (int i = 0; i < brojLinija;++i)
 					{
-						//datoteka >> niz[i].brojIgre >> niz[i].datum >> niz[i].brojBodova;
 						getline(datoteka2, nekiString);
 						std::string noviString = "";
 						niz[i].brojIgre = nekiString[0] == '1' ? 1 : (nekiString[0] == '2' ? 2 : (nekiString[0] == '3' ? 3 : (nekiString[0] == '4' ? 4 : 5)));
@@ -351,10 +334,6 @@ void pisiUCSV()
 						noviString.empty();
 						niz[i].brojBodova = std::stoi(noviString);
 						nekiString.empty();
-						/*if (i < 9)
-							std::cout << " " << i + 1 << ".-->  " << niz[i].brojIgre << ". igra  " << niz[i].datum << "  " << niz[i].brojBodova << std::endl;
-						else
-							std::cout << i + 1 << ".-->  " << niz[i].brojIgre << ". igra  " << niz[i].datum << "  " << niz[i].brojBodova << std::endl;*/
 						int a = i+1;
 						noviString = std::to_string(a);
 						noviString += ".,";
@@ -363,12 +342,11 @@ void pisiUCSV()
 						noviString += niz[i].datum;
 						noviString += ",";
 						noviString += std::to_string(niz[i].brojBodova);
-						//noviString += " bodova";
 						std::cout << "noviString: " << noviString << std::endl;
 
 						datoteka << noviString << std::endl;
 					}
-					Sleep(10000);
+					Sleep(4500);
 					datoteka << std::endl << std::endl << std::endl;
 				}
 			}
