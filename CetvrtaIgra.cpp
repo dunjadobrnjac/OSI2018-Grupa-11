@@ -6,13 +6,14 @@
 #include <cmath>
 #include <windows.h>
 #include "Statistikka.h"
+#include <locale>
 
 using namespace std;
 
 void Pisi(string poruka, bool GornjiDio , bool DonjiDio )//gornji i donji dio se koriste radi razgranicavanja segmenata koje zelimo naglasiti
 {
 	if (GornjiDio)
-	{
+	{ 
 		cout << "o=================================o" << endl;
 		cout << "|";
 	}
@@ -87,7 +88,7 @@ void prolazakKrozSlova(string pokusaj, char od, char doKraja)//ispisuje slova do
 void PisiDostupnaSlova(string pokusaj)
 {
 	Pisi("Dostupna Slova");
-	prolazakKrozSlova(pokusaj, 'A', 'L');//A K  L V
+	prolazakKrozSlova(pokusaj, 'A', 'L');
 	prolazakKrozSlova(pokusaj, 'M', 'Z');
 }
 bool pogadjajSlova(string rijec, string pokusaj)
@@ -195,14 +196,14 @@ pocetak4:
 			break;
 		char slovo;
 		cout << "Unesi slovo:"; cin >> slovo;
-		if (pokusaji.find(slovo) == string::npos && slovo < 'a' && slovo >= 'A')//da li se unose nova slova
+		char pom = toupper(slovo);
+		if (pokusaji.find(slovo) == string::npos && slovo < 'a' && slovo >= 'A' && slovo != ']' && slovo != '[' && slovo != '\\')//da li se unose nova slova
 			pokusaji += slovo;
-		else if (slovo >= 'a' && slovo < 'z')
+		else if (slovo >= 'a' && slovo <= 'z' && pokusaji.find(pom) == string::npos)
 		{
-			cout << "Unesite veliko slovo" << endl;; Sleep(2000);
-			j--;
+			pokusaji += pom;
 		}
-		else if (slovo > 'z' || slovo < 'A')
+		else if (slovo > 'z' || slovo < 'A' || slovo == ']' || slovo == '[' || slovo == '\\')
 		{
 			cout << "Unesite karakter slova!" << endl; Sleep(2000);
 			j--;
