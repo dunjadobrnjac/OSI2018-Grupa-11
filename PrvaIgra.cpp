@@ -1,11 +1,5 @@
 ﻿#include "PrvaIgra.h"
-#include <iostream>
-#include <fstream>
-#include <cstdlib> 
-#include <time.h>  
-#include <string>
-#include <cstdio>
-#include <Windows.h>
+
 int brojIgranja;
 
 void igrajPrvuIgru(int& bodovi, Korisnik k)
