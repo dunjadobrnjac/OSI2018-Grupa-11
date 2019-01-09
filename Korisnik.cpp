@@ -171,7 +171,7 @@ void Korisnik::ucitajKljuc(int igra)
 		std::cout << "--> ";
 		while (!(std::cin >> t) || std::cin.get() != '\n')
 		{
-			std::cout << "----> Unos nije validan! Unesite trajanje ponovo " << std::endl;
+			std::cout << "----> Unos nije validan! Unesite trajanje ponovo. " << std::endl;
 			std::cout << "--> ";
 			std::cin.clear();
 			std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // zabrana unosenja chakova i slova

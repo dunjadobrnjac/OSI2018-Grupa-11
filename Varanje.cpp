@@ -35,7 +35,7 @@ ovdje:
 	std::cout << "--> ";
 	while (!(std::cin >> i) || std::cin.get() != '\n')
 	{
-		std::cout << "----> Unos nije validan! Unesite broj igre ponovo " << std::endl;
+		std::cout << "----> Unos nije validan! Unesite broj igre ponovo. " << std::endl;
 		std::cout << "--> ";
 		std::cin.clear();
 		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
@@ -83,7 +83,7 @@ ovdje:
 			std::cout << "========================================================" << std::endl;
 			std::cout << "Imate važeæi kljuè i možete igrati igru.\nAko želite novi kljuè, prvo otkažite igru" << std::endl;
 			std::cout << "========================================================" << std::endl;
-			sleep(1500);
+			sleep(2800);
 		}
 		else
 			k.ucitajKljuc(i);
@@ -93,7 +93,7 @@ ovdje:
 		std::cout << "========================================================" << std::endl;
 		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova,\npa ne možete preuzeti kljuè!" << std::endl;
 		std::cout << "========================================================" << std::endl;
-		sleep(2000);
+		sleep(2800);
 	}
 	return true;
 }

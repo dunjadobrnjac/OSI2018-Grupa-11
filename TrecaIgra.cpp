@@ -174,7 +174,9 @@ pocetak:
 		bool p = false;//U nju smjestam rezultat izvrsavanja isTheSame f-je
 		do
 		{
+			std::cout << "======================================================" << std::endl;
 			std::cout << u8"Unesite 7 različitih brojeva u opsegu od 1 do 45:" << std::endl;
+			std::cout << "------------------------------------------------------" << std::endl;
 			int j = 0;
 			while (loto->odigraniBrojevi[j] != 0)
 				std::cout << loto->odigraniBrojevi[j++] << " ";
@@ -187,7 +189,9 @@ pocetak:
 
 			while (!(std::cin >> pom) || std::cin.get() != '\n')
 			{
+				std::cout << "======================================================" << std::endl;
 				std::cout << u8"***GREŠKA***    Unos nije validan. Unesite broj od 1-45" << std::endl;
+				std::cout << "======================================================" << std::endl;
 				std::cin.clear();
 				std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n'); // zabrana unosenja chakova i slova
 				sleep(2000);
@@ -198,12 +202,14 @@ pocetak:
 					std::cout << loto->odigraniBrojevi[j++] << u8" ";
 				std::cout << std::endl;
 				std::cout << "Unesite " << i + 1 << ". broj" << std::endl;
+				
 			}
 			p = (pom > 45) || (pom < 0) || isTheSame(loto->odigraniBrojevi, pom);
 			if (p && (pom > 0 && pom < 45))
 			{
-				std::cout << u8"***GREŠKA***    Dati broj je isti kao i " << isTheSame(loto->odigraniBrojevi, pom) << u8". broj pa morate unijeti " << i + 1 << u8". broj ponovo"<<std::endl;
-
+				std::cout << "======================================================" << std::endl;
+				std::cout << u8"***GREŠKA***    Dati broj je isti kao i " << isTheSame(loto->odigraniBrojevi, pom) << u8". broj \npa morate unijeti " << i + 1 << u8". broj ponovo"<<std::endl;
+				std::cout << "======================================================" << std::endl;
 				sleep(2000);
 				system("cls");
 			}
@@ -215,9 +221,17 @@ pocetak:
 		else
 		{
 			if (pom < 1)
-				std::cout << u8"***GREŠKA***    Uneseni broj je manji od jedan, pa morate unijeti drugi broj umjesto ovog" << std::endl;
+			{
+				std::cout << "======================================================" << std::endl;
+				std::cout << u8"***GREŠKA***    Uneseni broj je manji od jedan, pa \nmorate unijeti drugi broj umjesto ovog" << std::endl;
+				std::cout << "======================================================" << std::endl;
+			}
 			if (pom > 45)
-				std::cout << u8"***GREŠKA***    Uneseni broj je veci od 45, pa morate unijeti drugi broj umjesto ovog" << std::flush;
+			{
+				std::cout << "======================================================" << std::endl;
+				std::cout << u8"***GREŠKA***    Uneseni broj je veci od 45, pa morate\n unijeti drugi broj umjesto ovog" << std::flush;
+				std::cout << "\n======================================================" << std::endl;
+			}
 			i--;
 			sleep(2000);
 			system("cls");
