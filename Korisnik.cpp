@@ -199,7 +199,7 @@ void Korisnik::ucitajKljuc(int igra)
 			std::cout << "narednih 7 dana." << std::endl;
 			break;
 		case 4:
-			std::cout << u8"neograniceno." << std::endl;
+			std::cout << u8"neogranièeno." << std::endl;
 			break;
 		}
 		std::cout << "========================================================" << std::endl;
