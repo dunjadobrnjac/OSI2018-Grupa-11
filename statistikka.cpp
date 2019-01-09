@@ -342,7 +342,7 @@ void pisiUCSV()
 						noviString += niz[i].datum;
 						noviString += ",";
 						noviString += std::to_string(niz[i].brojBodova);
-						std::cout << "noviString: " << noviString << std::endl;
+						//std::cout << "noviString: " << noviString << std::endl;
 
 						datoteka << noviString << std::endl;
 					}
