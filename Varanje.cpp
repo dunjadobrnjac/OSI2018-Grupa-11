@@ -63,7 +63,10 @@ ovdje:
 			trenutniBrojBodova.open("referentniBrojBodova.txt");
 			if (trenutniBrojBodova.is_open())
 			{
-				trenutniBrojBodova << k.brojBodova;
+				if (k.brojBodova > 80)
+					trenutniBrojBodova << 80;
+				else
+					trenutniBrojBodova << k.brojBodova;
 				trenutniBrojBodova.close();
 			}
 			datoteka.close();
