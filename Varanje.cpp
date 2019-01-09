@@ -81,7 +81,6 @@ ovdje:
 		if (k.provjeraKljuca(i))
 		{
 			std::cout << "========================================================" << std::endl;
-			std::cout << "Imate važeæi kljuè i možete igrati igru.\nAko želite novi kljuè, prvo otkažite igru" << std::endl;
 			std::cout << "========================================================" << std::endl;
 			sleep(2800);
 		}
@@ -91,7 +90,6 @@ ovdje:
 	else
 	{
 		std::cout << "========================================================" << std::endl;
-		std::cout << u8"Još uvijek niste osvojili prvih 70 bodova,\npa ne možete preuzeti kljuè!" << std::endl;
 		std::cout << "========================================================" << std::endl;
 		sleep(2800);
 	}
