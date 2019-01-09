@@ -346,7 +346,7 @@ void pisiUCSV()
 
 						datoteka << noviString << std::endl;
 					}
-					Sleep(4500);
+					Sleep(800);
 					datoteka << std::endl << std::endl << std::endl;
 				}
 			}
