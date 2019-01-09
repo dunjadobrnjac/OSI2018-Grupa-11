@@ -75,7 +75,9 @@ int prvaIgraPrava(int& brojIgranja, int& osvojeniBodovi, Korisnik k)
 		}
 		else if (brojPokusaja == 5)
 		{
+			std::cout << "======================================================" << std::endl;
 			std::cout << u8"--> Nemate više pokušaja." << std::endl;
+			std::cout << u8"----> Traženi broj je : " << random << std::endl;
 			std::cout << "======================================================" << std::endl;
 		}
 
