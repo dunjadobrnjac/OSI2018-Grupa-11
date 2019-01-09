@@ -270,7 +270,7 @@ pocetak:
 	int varanje1 = rand() % 2 + 4, varanje;
 	if (varanje1 == 4)
 		varanje = rand() % 2 + 4;
-	else if (varanje == 5)
+	else if (varanje1 == 5)
 		varanje = 5;
 	else
 		varanje = 4;
