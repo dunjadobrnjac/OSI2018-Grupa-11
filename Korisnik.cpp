@@ -76,9 +76,9 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 		red1.close();
 		std::cout << "========================================================" << std::endl;
 		std::cout << s;
-		std::cout << std::endl << u8"Molimo Vas da kopirate kljuè, imate 7 sekundi!" << std::endl;
+		std::cout << std::endl << u8"Molimo Vas da kopirate kljuè, imate 10 sekundi!" << std::endl;
 		std::cout << "========================================================" << std::endl;
-		Sleep(7000);
+		Sleep(10000);
 		//system("pause");
 	}
 	system("cls");
