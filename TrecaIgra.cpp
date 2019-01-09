@@ -27,18 +27,28 @@ bool funkcijaZaVaranje(int* brojac, int niz[], int pom, int b, int odigrani[])
 			}
 	return false;
 }
+
 int kolikoSmijePogoditi(Korisnik k, bool& flag)
 {
 	if (funkcijaKakoOdigrati(k) == 0)
-		return 1;
+	{
+		int a = rand() % 3 + 1;
+		if (a == 1)
+			return rand() % 3;
+		else if (a == 2)
+			return 2;
+		else
+			rand() % 2 + 2;
+	}
 	if (funkcijaKakoOdigrati(k) == 1)
-		return rand() % 7 + 1;
+		return rand() % 6 + 1;
 	else
 	{
 		flag = true;
 		return 7;
 	}
 }
+
 int brojPogodakaFunkcija(int niz[], int odigrani[])
 {
 	int brojPogodaka = 0;
@@ -48,6 +58,7 @@ int brojPogodakaFunkcija(int niz[], int odigrani[])
 				brojPogodaka++;
 	return brojPogodaka;
 }
+
 int daLiJePogodjen(int potencijalniPogodak, int loto[])
 {
 	for (int i = 0; i < 20; i++)
@@ -55,6 +66,7 @@ int daLiJePogodjen(int potencijalniPogodak, int loto[])
 			return true;
 	return false;
 }
+
 int sumaBodova(int brojac)
 {
 	int pomocna = 0;
@@ -141,6 +153,7 @@ void ispisiRezultat(int loto[], int odigrani[], int broj, Korisnik k)
 	upisiUTxtFajl(neki.brojIgre, neki.brojBodova, neki.datum);
 	smjestiNaPravoMjesto(neki.brojIgre);
 }
+
 int odrediPoziciju(int lotoBrojevi[], int odigraniBrojevi[])
 {
 	while (true)
@@ -155,6 +168,7 @@ int odrediPoziciju(int lotoBrojevi[], int odigraniBrojevi[])
 
 	}
 }
+
 void lotoIgra(int* brojUlozenihBodova, int* trenutniBrojBodova, LOTO* loto, Korisnik k)
 {
 	//Zbog opsega nmg brojacu pristupiti van petlje
@@ -253,17 +267,30 @@ pocetak:
 		loto->lotoBrojevi[i] = pom;
 	}
 	int brojPogodaka = brojPogodakaFunkcija(loto->lotoBrojevi, loto->odigraniBrojevi);
-	if (flag && brojPogodaka < 4)
+	int varanje1 = rand() % 2 + 4, varanje;
+	if (varanje1 == 4)
+		varanje = rand() % 2 + 4;
+	else if (varanje == 5)
+		varanje = 5;
+	else
+		varanje = 4;
+	if (flag && brojPogodaka < varanje)
 	{
 		int i = 0;
-		while (brojPogodaka < 4 && i < 8)
+		while (brojPogodaka < varanje && i < 8)
 		{
 			if (!daLiJePogodjen(loto->odigraniBrojevi[i], loto->lotoBrojevi))
 			{
 				loto->lotoBrojevi[odrediPoziciju(loto->lotoBrojevi, loto->odigraniBrojevi)] = loto->odigraniBrojevi[i];
 				brojPogodaka = brojPogodakaFunkcija(loto->lotoBrojevi, loto->odigraniBrojevi);
 			}
-			i += 2;
+			if (i < 5)
+			{
+				i += 2;
+				//std::cout << varanje << " " << b << std::endl;
+			}
+			else
+				i++;
 		}
 	}
 	brojPogodaka = brojPogodakaFunkcija(loto->lotoBrojevi, loto->odigraniBrojevi);
