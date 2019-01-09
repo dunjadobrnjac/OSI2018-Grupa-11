@@ -58,7 +58,8 @@ int main()
 		if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
 		{
 			k.ucitajKljuc(1);
-			igrajPrvuIgru(k.brojBodova, k);
+			if (k.provjeraKljuca(1))
+			   igrajPrvuIgru(k.brojBodova, k);
 		}
 		else
 			if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0)
