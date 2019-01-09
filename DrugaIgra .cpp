@@ -73,7 +73,7 @@ void igrajDruguIgru(int& bodovi,Korisnik k)
 	int rezim = funkcijaKakoOdigrati(k);
 	ucitajPitanja(nizPitanja, rezim);
 	RandomPitanjee(cuvar);
-
+	int brojac = 0;
 	for (int i = 0; i < 5; i++)
 	{
 		do
@@ -87,10 +87,21 @@ void igrajDruguIgru(int& bodovi,Korisnik k)
 		} while (odgovor.compare("a") && odgovor.compare("b") && odgovor.compare("c"));
 
 		if (odgovor == nizPitanja[cuvar[i]].tacanOdgovor)
+		{
 			bodovi += 20;
+			brojac++;
+		}
 		else if (odgovor != nizPitanja[cuvar[i]].tacanOdgovor)
 			bodovi -= 30;
 	}
+	if (brojac == 5)
+		bodovi += 50;
+	if (brojac == 1)
+		std::cout << u8"Imali ste " << brojac << u8". taèan odgovora.\n";
+	if (brojac > 1 && brojac < 5)
+		std::cout << u8"Imali ste " << brojac << u8". taèna odgovora.\n";
+	if (brojac == 5 || brojac == 0)
+		std::cout << u8"Imali ste " << brojac << u8". taènih odgovora.\n";
 	
 	std::string odg;
 	std::cout << u8"Da li želite opet igrati? (Da/Ne)" << std::endl;
