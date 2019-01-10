@@ -4,3 +4,4 @@
 
 void instalacija();
 bool instalacijaZaMain();
+void deinstalacija();
