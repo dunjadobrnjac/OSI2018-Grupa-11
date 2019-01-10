@@ -5,7 +5,6 @@
 #include <Windows.h>
 
 int Korisnik::brUlaza = 0;
-bool Korisnik::jednakoMinusJedan = false;
 
 Korisnik::Korisnik(int br1, int br2)
 {
@@ -162,7 +161,7 @@ std::ostream& operator<<(std::ostream& output, const Korisnik& k)
 
 void Korisnik::ucitajKljuc(int igra)
 {
-	int t;
+	/*int t;
 	if (igra != 4)
 	{
 		std::cout << "========================================================" << std::endl;
@@ -184,11 +183,11 @@ void Korisnik::ucitajKljuc(int igra)
 		}
 	}
 	else
-		t = 4;
-	if (dajKljuc(t, igra))
+		t = 4;*/
+	if (dajKljuc(igra, igra))
 	{
 		std::cout << u8"Možete igrati " << igra << ". igru ";
-		switch (t)
+		switch (igra)
 		{
 		case 1:
 			std::cout << "narednih sat vremena." << std::endl;
@@ -262,9 +261,8 @@ void Korisnik::otkaziIgru(int broj)
 			datoteka.open("trajanjeCetvrtaIgra.txt");
 		if (datoteka.is_open())
 		{
-			int b = -1;
 			datoteka.seekp(0, std::ios::beg);
-			datoteka << b << std::endl;
+			datoteka << '0' << std::endl;
 			datoteka << '0';
 			datoteka.close();
 		}
@@ -306,11 +304,6 @@ bool Korisnik::provjeraKljuca(int igra)
 	{
 		int trajanje;
 		unos >> trajanje;
-		if (trajanje == -1)
-		{
-			jednakoMinusJedan = true;
-			return false;
-		}
 		if (igra == 4 && trajanje == 4)
 			return true;
 		if (trajanje == 0)
@@ -335,27 +328,6 @@ bool Korisnik::provjeraKljuca(int igra)
 		if (difftime(sad, uneseno) < sek)
 			return true;
 		unos.close();
-		std::ofstream izlaz;
-		switch (igra)
-		{
-		case 1:
-			izlaz.open("trajanjePrvaIgra.txt");
-			break;
-		case 2:
-			izlaz.open("trajanjeDrugaIgra.txt");
-			break;
-		case 3:
-			izlaz.open("trajanjeTrecaIgra.txt");
-			break;
-		case 4:
-			izlaz.open("trajanjeCetvrtaIgra.txt");
-			break;
-		}
-		int b = -1;
-		izlaz.seekp(0, std::ios::beg);
-		izlaz << b << std::endl;
-		izlaz << '0';
-		izlaz.close();
 		return false;
 	}
 }
