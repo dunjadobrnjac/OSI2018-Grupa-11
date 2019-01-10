@@ -45,6 +45,8 @@ ovdje:
 		std::cout << "----> Niste unijeli odgovarajuci broj! " << std::endl;
 		goto ovdje;
 	}
+	if (!k.provjeraKljuca(i) && k.jednakoMinusJedan == true)
+		return false;
 	std::ifstream datoteka;
 	datoteka.open("prviPogodak.txt");
 	if (datoteka.is_open())
@@ -84,7 +86,7 @@ ovdje:
 		if (k.provjeraKljuca(i))
 		{
 			std::cout << "========================================================" << std::endl;
-			std::cout << u8"Imte važeæi kljuè i možete igrati igru.\nAko želite novi kljuè, prvo otkažite igru." << std::endl;
+			std::cout << u8"Imte važeæi kljuè i možete igrati igru." << std::endl;
 			std::cout << "========================================================" << std::endl;
 			sleep(2800);
 		}
