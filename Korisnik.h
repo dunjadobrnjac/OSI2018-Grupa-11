@@ -10,17 +10,18 @@ public:
 	friend std::istream& operator>>(std::istream&, Korisnik&);
 	friend std::ostream& operator<<(std::ostream&, const Korisnik&);
 	const char* getIme()const;
-    const  int& getBrUlaza()const;
-	bool dajKljuc(int,int);
+	const  int& getBrUlaza()const;
+	bool dajKljuc(int, int);
 	bool provjeraKljuca(int);
 	void upisiBodove()const;
 	void ispisiBodove()const;
 	void ucitajBodove();
 	void ucitajKljuc(int);
-	void upisKljuca(int,int);
+	void upisKljuca(int, int);
 	void otkaziIgru(int);
 	int brojBodova;
 	int brojUlozenihBodova;
+	static bool jednakoMinusJedan;
 private:
 	char* ime;
 	void sacuvajIme();
