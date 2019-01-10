@@ -13,12 +13,14 @@ class LOTO
 public:
 	int lotoBrojevi[20];
 	int odigraniBrojevi[7];
+	void provjeraFunkcija();
+	int funkcijaKojaGeneriseBroj();
 };
 int isTheSame(int [], int );
 bool funkcijaZaVaranje(int* , int [], int , int , int []);
 int brojPogodakaFunkcija(int [], int []);
 int kolikoSmijePogoditi(Korisnik, bool&);
-int daLiJePogodjen(int , int[]);
+bool daLiJePogodjen(int , int[]);
 int odrediPoziciju(int[], int[]);
 int sumaBodova(int );
 void sortirajNiz(int* , int );

@@ -59,7 +59,7 @@ int brojPogodakaFunkcija(int niz[], int odigrani[])
 	return brojPogodaka;
 }
 
-int daLiJePogodjen(int potencijalniPogodak, int loto[])
+bool daLiJePogodjen(int potencijalniPogodak, int loto[])
 {
 	for (int i = 0; i < 20; i++)
 		if (loto[i] == potencijalniPogodak)
@@ -140,18 +140,7 @@ void ispisiRezultat(int loto[], int odigrani[], int broj, Korisnik k)
 	std::cout << "----------------------------------" << std::endl;
 	std::cout<< "Osvojili ste " << osvojeniBodoviRezultat << " bodova." << std::endl;
 	std::cout << "==================================" << std::endl;
-	//Za klasu korisnik
-	k.brojBodova += osvojeniBodoviRezultat;
-	k.brojBodova -= 100;
-	//std::cout << k.brojBodova;
-	k.upisiBodove();
-	std::cout << std::endl;
-	//Za statistiku
-	char karakteri[22];
-	for (int i = 0; i < 22; i++)karakteri[i] = 0;
-	Stats neki = {3, Vrijeme() , osvojeniBodoviRezultat};
-	upisiUTxtFajl(neki.brojIgre, neki.brojBodova, neki.datum);
-	smjestiNaPravoMjesto(neki.brojIgre);
+
 }
 
 int odrediPoziciju(int lotoBrojevi[], int odigraniBrojevi[])
@@ -165,12 +154,12 @@ int odrediPoziciju(int lotoBrojevi[], int odigraniBrojevi[])
 				pomocna = true;
 		if (pomocna == false)
 			return b;
-
 	}
 }
 
 void lotoIgra(int* brojUlozenihBodova, int* trenutniBrojBodova, LOTO* loto, Korisnik k)
 {
+	k.ucitajBodove();
 	//Zbog opsega nmg brojacu pristupiti van petlje
 	srand(time(NULL));	//Zbog f-je random
 	system("cls");
@@ -294,8 +283,23 @@ pocetak:
 		}
 	}
 	brojPogodaka = brojPogodakaFunkcija(loto->lotoBrojevi, loto->odigraniBrojevi);
+	loto->provjeraFunkcija();
 	ispisiRezultat(loto->lotoBrojevi, loto->odigraniBrojevi, brojPogodaka, k);
-	
+	int osvojeniBodoviRezultat = sumaBodova(brojPogodaka);
+
+	//Za klasu korisnik
+	k.brojBodova += osvojeniBodoviRezultat;
+	k.brojBodova -= 100;
+	//std::cout << k.brojBodova;
+	k.upisiBodove();
+	std::cout << std::endl;
+	//Za statistiku
+	char karakteri[22];
+	for (int i = 0; i < 22; i++)karakteri[i] = 0;
+	Stats neki = { 3, Vrijeme() , osvojeniBodoviRezultat };
+	upisiUTxtFajl(neki.brojIgre, neki.brojBodova, neki.datum);
+	smjestiNaPravoMjesto(neki.brojIgre);
+
 	std::string odgovor;
 	std::cout << u8"Da li želite opet igrati? (Da/Ne)" << std::endl;
 	while (true)
@@ -312,5 +316,34 @@ pocetak:
 	{
 		system("cls");
 		goto pocetak;
+	}
+}
+
+void LOTO::provjeraFunkcija()
+{
+	for (int i=0; i<20; i++)
+	{
+		if (lotoBrojevi[i] < 0)
+		{
+			std::cout << "USAO SAM" << std::endl;
+			lotoBrojevi[i] = funkcijaKojaGeneriseBroj();
+		}
+		if ((lotoBrojevi[i] % 46) != lotoBrojevi[i])
+			lotoBrojevi[i] = funkcijaKojaGeneriseBroj();
+	}
+}
+int LOTO::funkcijaKojaGeneriseBroj()
+{
+	for (int k = 1; k < 45;k++)
+	{
+		bool tacnost = true;
+		for (int i = 0; i < 20; i++)
+			if (lotoBrojevi[i] == k)
+				tacnost = false;
+		for (int i = 0; i < 7; i++)
+			if (lotoBrojevi[i] == k)
+				tacnost = false;
+		if (tacnost)
+			return k;
 	}
 }
