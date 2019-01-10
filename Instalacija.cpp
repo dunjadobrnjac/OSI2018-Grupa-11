@@ -93,7 +93,7 @@ void instalacija()
 }
 bool instalacijaZaMain()
 {
-	int i=0;
+	int i = 0;
 	std::ifstream datoteka1;
 	datoteka1.open("instalacija.txt");
 	if (datoteka1.is_open())
@@ -104,10 +104,13 @@ bool instalacijaZaMain()
 	if (!i)
 	{
 		int pomocna = 0;
-		std::cout << "Da li zelite instalirati aplikaciju?" << std::endl;
+		std::cout << "Da li zelite instalirati aplikaciju 1/0?" << std::endl;
 		std::cin >> pomocna;//Da ili ne=>Onaj blok=>Isidora
 		if (pomocna == 0)
+		{
 			std::cout << "Dovidjenja, prijatno!" << std::endl;
+			return false;
+		}
 		else
 			instalacija();
 		std::ofstream fajl;
@@ -133,7 +136,7 @@ bool instalacijaZaMain()
 void deinstalacija()
 {
 	std::ofstream datoteka;
-	datoteka.open("instaslacija.txt");
+	datoteka.open("instalacija.txt");
 	{
 		datoteka << 0;
 		datoteka.close();
