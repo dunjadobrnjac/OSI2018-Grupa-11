@@ -1,11 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "PrvaIgra.h"
-#include "DrugaIgra.h"
-#include "TrecaIgra.h"
-#include "CetvrtaIgra.h"
+#include "Prva.h"
+#include "Druga.h"
+#include "Treca.h"
+#include "Cetvrta.h"
 #include "Korisnik.h"
-#include "Statistikka.h"
+#include "Statistika.h"
 #include "Varanje.h"
+#include "Instalacija.h"
 
 int main()
 {
@@ -14,253 +15,335 @@ int main()
 	// Enable buffering to prevent VS from chopping up UTF-8 byte sequences
 	setvbuf(stdout, nullptr, _IOFBF, 1000);
 
-	int ulazak = 0;
 
-	std::cout << "BringITon platforma za igre\n" << std::endl;
-
-	int resstart = 0;
-	std::ifstream restart;
-	restart.open("restart.txt");
-	if (restart.is_open())
+	if (instalacijaZaMain())
 	{
-		restart >> resstart;
-		restart.close();
-	}
+		int ulazak = 0;
 
-	Korisnik k;
-	k.ucitajBodove();
-	
-	if (!resstart)
-	{
-		if (k.getBrUlaza() == 0)
-		{
-			std::cin >> k;
-		}
-		else
-		{
-			std::cout << "Pozdrav " << k.getIme() << "!" << std::endl;
-		}
-		std::cout << u8"Omoguæeno je igranje samo prve igre." << std::endl;
-		std::cout << u8"Da li želite da igrate prvu igru --> Pogaðanje sluèajnog broja ? (Da/Ne)" << std::endl;
-		std::string odgovor;
-		while (true) 
-		{
-			std::cin >> odgovor;
+		std::cout << "BringITon platforma za igre\n" << std::endl;
 
-			if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0
-				|| odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
-				break;
-			else
-				std::cout << " Unesite 'Da' ili 'Ne'...\n";
-		}
-
-		system("cls");
-		if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
-		{
-			k.ucitajKljuc(1);
-			if (k.provjeraKljuca(1))
-			   igrajPrvuIgru(k.brojBodova, k);
-		}
-		else
-			if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0)
-				return 0;
-
-		std::ofstream restart;
+		int resstart = 0;
+		std::ifstream restart;
 		restart.open("restart.txt");
 		if (restart.is_open())
 		{
-			restart << 1;
+			restart >> resstart;
 			restart.close();
 		}
-		system("cls");
-	}
-	else
-		std::cout << "Pozdrav " << k.getIme() << "!\n" << std::endl;
 
-	int brojIgre;
-	while (true)
-	{
-	pocetak:
-		if (ulazak)
-			std::cout << "BringITon platforma za igre\n" << std::endl;
-		ulazak = 1;
+		Korisnik k;
 		k.ucitajBodove();
-		k.ispisiBodove();
-	
-		std::cout << "\n\n========================================================" << std::endl;
-		std::cout << u8"NA RASPOLAGANJU SU VAM SLJEDEÆE OPCIJE:" << std::endl;
-		std::cout << "--------------------------------------------------------" << std::endl;
-		std::cout << u8" 1 --> Pogaðanje sluèajnog broja" << std::endl;
-		std::cout << " 2 --> Kviz" << std::endl;
-		std::cout << " 3 --> Loto " << std::endl;
-		std::cout << u8" 4 --> Vješala" << std::endl;
-		std::cout << u8" 5 --> Kupovina/preuzimanje kljuèa" << std::endl;
-		std::cout << u8" 6 --> Prikaz statistike" << std::endl;
-		std::cout << " 7 --> Eksport CSV fajla" << std::endl;
-		std::cout << u8" 8 --> Otkazivanje igre"<<std::endl;
-		std::cout << u8" 9 --> Izlaz iz igrice"<<std::endl;
-		std::cout << "========================================================\n" << std::endl;
-		std::cout << u8"Unesite željenu opciju: ";
-		while (!(std::cin >> brojIgre) || std::cin.get() != '\n')
+
+		if (!resstart)
 		{
-			std::cout << u8"----> Unos nije validan!\nUnesite željenu opciju: ";
-			std::cin.clear();
-			std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
-		}
-		system("cls");
-		if (brojIgre == 1)
-		{
-			if (k.provjeraKljuca(1))
-				igrajPrvuIgru(k.brojBodova,k);
-			else
+			if (k.getBrUlaza() == 0)
 			{
-				std::cout << "========================================================" << std::endl;
-				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru.\n" << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju\nu kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
-				std::cout << "========================================================" << std::endl;
-				sleep(3200);
-			}
-		}
-		else if (brojIgre == 2)
-		{
-			if (k.provjeraKljuca(2))
-				igrajDruguIgru(k.brojBodova,k);
-			else
-			{
-				std::cout << "========================================================" << std::endl;
-				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru.\n" << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju\nu kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
-				std::cout << "========================================================" << std::endl;
-				sleep(3200);
-			}
-		}
-		else if (brojIgre == 3)
-		{
-			int pomocna = 0;
-			LOTO loto;
-			if (k.provjeraKljuca(3))
-			{
-				std::cout << "========================================================" << std::endl;
-				std::cout << u8"Ulaz u igru je koštao 100 bodova. "<<std::endl;
-				std::cout << "========================================================" << std::endl;
-				sleep(1800);
-				lotoIgra(&pomocna, &k.brojBodova, &loto, k);
+				std::cin >> k;
 			}
 			else
 			{
-				std::cout << "========================================================" << std::endl;
-				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru.\n" << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju\nu kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
-				std::cout << "========================================================" << std::endl;
-				sleep(3200);
+				std::cout << "Pozdrav " << k.getIme() << "!" << std::endl;
 			}
-		}
-		else if (brojIgre == 4)
-		{
-			if (k.provjeraKljuca(4))
-				vjesala(k.brojBodova,k);
-			else
-			{
-				std::cout << "========================================================" << std::endl;
-				std::cout << u8"Morate nabaviti kljuè da igrate ovu igru.\n" << std::endl;
-				std::cout << u8"Da nabavite kljuè, idite u glavnom meniju\nu kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
-				std::cout << "========================================================" << std::endl;
-				sleep(3200);
-			}
-		}
-		else if (brojIgre == 6)
-		{
-			int broj;
-			std::cout << "========================================================" << std::endl;
-			std::cout << u8"Za koju igru želite prikaz statistike (1/2/3/4) ?"<<std::endl;
-		tu:
-			std::cout << "--> ";
-			while (!(std::cin >> broj) || std::cin.get() != '\n')
-			{
-				std::cout << "----> Unos nije validan! Unesite broj igre ponovo. " << std::endl;
-				std::cout << "--> ";
-				std::cin.clear();
-				std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
-			}
-			if (broj < 1 || broj > 4)
-			{
-				std::cout << u8"----> Niste unijeli odgovarajuæi broj! " << std::endl;
-				goto tu;
-			}
-			std::cout << "========================================================" << std::endl;
-			sleep(800);
-			ispisStatistike(broj);
-		}
-		else if (brojIgre == 5)
-		{
-			bool l = varanjePriprema(k);
-		}
-		else if (brojIgre == 8)
-		{
-			int broj;
-			std::cout << "========================================================" << std::endl;
-			std::cout << u8" Koju igru želite da otkažete (1/2/3/4)?" << std::endl;
-		ovdje:
-			std::cout << "--> ";
-			while (!(std::cin >> broj) || std::cin.get() != '\n')
-			{
-				std::cout << "----> Unos nije validan! Unesite broj igre ponovo. " << std::endl;
-				std::cout << "--> ";
-				std::cin.clear();
-				std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
-			}
-			if (broj < 1 || broj > 4)
-			{
-				std::cout << u8"----> Niste unijeli odgovarajuæi broj! " << std::endl;
-				goto ovdje;
-			}
-			k.otkaziIgru(broj);
-		}
-		else if (brojIgre == 7)
-		{
-			pisiUCSV();
-		}
-		else if (brojIgre == 9)
-		{
+			std::cout << u8"Omoguæeno je igranje samo prve igre." << std::endl;
+			std::cout << u8"Da li želite da igrate prvu igru --> Pogaðanje sluèajnog broja ? (Da/Ne)" << std::endl;
 			std::string odgovor;
-			std::cout << "================================================================" << std::endl;
-			std::cout << u8"Da li ste sigurni da želite izaæi iz platforme za igre? (Da/Ne)" << std::endl;
-		tamo:
-			std::cout << "--> ";
 			while (true)
 			{
 				std::cin >> odgovor;
 
 				if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0
 					|| odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+					break;
+				else
+					std::cout << " Unesite 'Da' ili 'Ne'...\n";
+			}
+
+			system("cls");
+			if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+			{
+				k.ucitajKljuc(1);
+				if (k.provjeraKljuca(1))
+					igrajPrvuIgru(k.brojBodova, k);
+			}
+			else
+				if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0)
+					return 0;
+
+			std::ofstream restart;
+			restart.open("restart.txt");
+			if (restart.is_open())
+			{
+				restart << 1;
+				restart.close();
+			}
+			system("cls");
+		}
+		else
+			std::cout << "Pozdrav " << k.getIme() << "!\n" << std::endl;
+
+		int brojIgre;
+		while (true)
+		{
+		pocetak:
+			if (ulazak)
+				std::cout << "BringITon platforma za igre\n" << std::endl;
+			ulazak = 1;
+			k.ucitajBodove();
+			k.ispisiBodove();
+
+			std::cout << "\n\n========================================================" << std::endl;
+			std::cout << u8"NA RASPOLAGANJU SU VAM SLJEDEÆE OPCIJE:" << std::endl;
+			std::cout << "--------------------------------------------------------" << std::endl;
+			std::cout << u8" 1 --> Pogaðanje sluèajnog broja" << std::endl;
+			std::cout << " 2 --> Kviz" << std::endl;
+			std::cout << " 3 --> Loto " << std::endl;
+			std::cout << u8" 4 --> Vješala" << std::endl;
+			std::cout << u8" 5 --> Kupovina/preuzimanje kljuèa" << std::endl;
+			std::cout << u8" 6 --> Prikaz statistike" << std::endl;
+			std::cout << " 7 --> Eksport CSV fajla" << std::endl;
+			std::cout << u8" 8 --> Otkazivanje igre" << std::endl;
+			std::cout << u8" 9 --> Izlaz iz igrice" << std::endl;
+			std::cout << u8"10 --> Deinstalacija" << std::endl;
+			std::cout << "========================================================\n" << std::endl;
+			std::cout << u8"Unesite željenu opciju: ";
+			while (!(std::cin >> brojIgre) || std::cin.get() != '\n')
+			{
+				std::cout << u8"----> Unos nije validan!\nUnesite željenu opciju: ";
+				std::cin.clear();
+				std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
+			}
+			system("cls");
+			if (brojIgre == 1)
+			{
+				if (k.provjeraKljuca(1))
+					igrajPrvuIgru(k.brojBodova, k);
+				else if (k.jednakoMinusJedan == true)
 				{
-					std::cout << "================================================================" << std::endl;
-					sleep(800);
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8" Ovu igru ste veæ otkazali,stoga je ne možete igrati !!" << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(3200);
+				}
+
+				else
+				{
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8"Morate nabaviti kljuè da igrate ovu igru.\n" << std::endl;
+					std::cout << u8"Da nabavite kljuè, idite u glavnom meniju\nu kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(3200);
+				}
+			}
+			else if (brojIgre == 2)
+			{
+				if (k.provjeraKljuca(2))
+					igrajDruguIgru(k.brojBodova, k);
+				else if (k.jednakoMinusJedan == true)
+				{
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8" Ovu igru ste veæ otkazali,stoga je ne možete igrati !!" << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(3200);
+				}
+
+				else
+				{
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8"Morate nabaviti kljuè da igrate ovu igru.\n" << std::endl;
+					std::cout << u8"Da nabavite kljuè, idite u glavnom meniju\nu kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(3200);
+				}
+			}
+			else if (brojIgre == 3)
+			{
+				int pomocna = 0;
+				LOTO loto;
+				if (k.provjeraKljuca(3))
+				{
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8"Ulaz u igru je koštao 100 bodova. " << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(1800);
+					lotoIgra(&pomocna, &k.brojBodova, &loto, k);
+				}
+				else if (k.jednakoMinusJedan == true)
+				{
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8" Ovu igru ste veæ otkazali,stoga je ne možete igrati !!" << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(3200);
+				}
+				else
+				{
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8"Morate nabaviti kljuè da igrate ovu igru.\n" << std::endl;
+					std::cout << u8"Da nabavite kljuè, idite u glavnom meniju\nu kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(3200);
+				}
+			}
+			else if (brojIgre == 4)
+			{
+				if (k.provjeraKljuca(4))
+					vjesala(k.brojBodova, k);
+				else if (k.jednakoMinusJedan == true)
+				{
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8" Ovu igru ste veæ otkazali,stoga je ne možete igrati !!" << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(3200);
+				}
+				else
+				{
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8"Morate nabaviti kljuè da igrate ovu igru.\n" << std::endl;
+					std::cout << u8"Da nabavite kljuè, idite u glavnom meniju\nu kupovina/preuzimanje kljuèa (opcija 5)." << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(3200);
+				}
+			}
+			else if (brojIgre == 6)
+			{
+				int broj;
+				std::cout << "========================================================" << std::endl;
+				std::cout << u8"Za koju igru želite prikaz statistike (1/2/3/4) ?" << std::endl;
+			tu:
+				std::cout << "--> ";
+				while (!(std::cin >> broj) || std::cin.get() != '\n')
+				{
+					std::cout << "----> Unos nije validan! Unesite broj igre ponovo. " << std::endl;
+					std::cout << "--> ";
+					std::cin.clear();
+					std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
+				}
+				if (broj < 1 || broj > 4)
+				{
+					std::cout << u8"----> Niste unijeli odgovarajuæi broj! " << std::endl;
+					goto tu;
+				}
+				std::cout << "========================================================" << std::endl;
+				sleep(800);
+				ispisStatistike(broj);
+			}
+			else if (brojIgre == 10)
+			{
+				std::string odgovor;
+				std::cout << "================================================================" << std::endl;
+				std::cout << u8"Da li ste sigurni da želite deinstalirati  platformu za igre? (Da/Ne)" << std::endl;
+			tamo1:
+				std::cout << "--> ";
+				while (true)
+				{
+					std::cin >> odgovor;
+
+					if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0
+						|| odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+					{
+						std::cout << "================================================================" << std::endl;
+						sleep(800);
+						break;
+					}
+					else
+					{
+						std::cout << "Unesite 'Da' ili 'Ne'...\n";
+						goto tamo1;
+					}
+				}
+				if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+				{
+					system("cls");
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8"Hvala na igranju, doviðenja!!!" << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(1000);
+					deinstalacija();
+					return 0;
+				}
+				else
+				{
+					system("cls");
+					goto pocetak;
+				}
+			}
+			else if (brojIgre == 5)
+			{
+				bool l = varanjePriprema(k);
+				if (!l && k.jednakoMinusJedan == true)
+				{
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8" Ovu igru ste veæ otkazali,stoga je ne možete igrati !!" << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(3200);
+				}
+			}
+			else if (brojIgre == 8)
+			{
+				int broj;
+				std::cout << "========================================================" << std::endl;
+				std::cout << u8" Koju igru želite da otkažete (1/2/3/4)?" << std::endl;
+			ovdje:
+				std::cout << "--> ";
+				while (!(std::cin >> broj) || std::cin.get() != '\n')
+				{
+					std::cout << "----> Unos nije validan! Unesite broj igre ponovo. " << std::endl;
+					std::cout << "--> ";
+					std::cin.clear();
+					std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
+				}
+				if (broj < 1 || broj > 4)
+				{
+					std::cout << u8"----> Niste unijeli odgovarajuæi broj! " << std::endl;
+					goto ovdje;
+				}
+				k.otkaziIgru(broj);
+			}
+			else if (brojIgre == 7)
+			{
+				pisiUCSV();
+			}
+			else if (brojIgre == 9)
+			{
+				std::string odgovor;
+				std::cout << "================================================================" << std::endl;
+				std::cout << u8"Da li ste sigurni da želite izaæi iz platforme za igre? (Da/Ne)" << std::endl;
+			tamo:
+				std::cout << "--> ";
+				while (true)
+				{
+					std::cin >> odgovor;
+
+					if (odgovor.compare("ne") == 0 || odgovor.compare("Ne") == 0 || odgovor.compare("NE") == 0 || odgovor.compare("nE") == 0
+						|| odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+					{
+						std::cout << "================================================================" << std::endl;
+						sleep(800);
+						break;
+					}
+					else
+					{
+						std::cout << "Unesite 'Da' ili 'Ne'...\n";
+						goto tamo;
+					}
+				}
+				if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
+				{
+					system("cls");
+					std::cout << "========================================================" << std::endl;
+					std::cout << u8"Hvala na igranju, doviðenja!!!" << std::endl;
+					std::cout << "========================================================" << std::endl;
+					sleep(1000);
 					break;
 				}
 				else
 				{
-					std::cout << "Unesite 'Da' ili 'Ne'...\n";
-					goto tamo;
+					system("cls");
+					goto pocetak;
 				}
 			}
-			if (odgovor.compare("da") == 0 || odgovor.compare("Da") == 0 || odgovor.compare("dA") == 0 || odgovor.compare("DA") == 0)
-			{
-				system("cls");
-				std::cout << "========================================================" << std::endl;
-				std::cout << u8"Hvala na igranju, doviðenja!!!" << std::endl;
-				std::cout << "========================================================" << std::endl;
-				sleep(1000);
-				break;
-			}
-			else
-			{
-				system("cls");
-				goto pocetak;
-			}
+			system("cls");
 		}
-		system("cls");
+		system("pause");
+		return 0;
 	}
-	system("pause");
-	return 0;
 }
