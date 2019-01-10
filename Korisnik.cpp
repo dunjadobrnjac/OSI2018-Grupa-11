@@ -5,6 +5,7 @@
 #include <Windows.h>
 
 int Korisnik::brUlaza = 0;
+bool Korisnik::jednakoMinusJedan = false;
 
 Korisnik::Korisnik(int br1, int br2)
 {
@@ -36,9 +37,9 @@ const int& Korisnik::getBrUlaza()const
 	return brUlaza;
 }
 
-bool Korisnik::dajKljuc(int trajanje,int igra) 
+bool Korisnik::dajKljuc(int trajanje, int igra)
 {
-	char *s=new char[20];
+	char *s = new char[20];
 	std::ifstream kljucevi;
 	int i;//za dobavljanje kljuca koji do sada nije vracen,a da je istog trajanja
 	if (trajanje == 1)
@@ -67,8 +68,8 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 		red.open("redKljucevaPoTrajanjima.txt");
 		int r[4];
 		red >> r[0] >> r[1] >> r[2] >> r[3];
-		for(int j=0;j<=r[i];j++)
-		 kljucevi >> s;
+		for (int j = 0; j <= r[i]; j++)
+			kljucevi >> s;
 		r[i]++;
 		red.close();
 		std::ofstream red1;
@@ -88,7 +89,7 @@ bool Korisnik::dajKljuc(int trajanje,int igra)
 	std::cin >> s1;
 	if (strcmp(s1, s) == 0)
 	{
-		upisKljuca(igra,trajanje);
+		upisKljuca(igra, trajanje);
 		return true;
 	}
 	return false;
@@ -215,7 +216,7 @@ void Korisnik::ucitajKljuc(int igra)
 	}
 }
 
-void Korisnik::upisKljuca(int igra,int t)
+void Korisnik::upisKljuca(int igra, int t)
 {
 	time_t rawtime;
 	struct tm * timeinfo;
@@ -261,8 +262,9 @@ void Korisnik::otkaziIgru(int broj)
 			datoteka.open("trajanjeCetvrtaIgra.txt");
 		if (datoteka.is_open())
 		{
+			int b = -1;
 			datoteka.seekp(0, std::ios::beg);
-			datoteka << '0' << std::endl;
+			datoteka << b << std::endl;
 			datoteka << '0';
 			datoteka.close();
 		}
@@ -304,6 +306,11 @@ bool Korisnik::provjeraKljuca(int igra)
 	{
 		int trajanje;
 		unos >> trajanje;
+		if (trajanje == -1)
+		{
+			jednakoMinusJedan = true;
+			return false;
+		}
 		if (igra == 4 && trajanje == 4)
 			return true;
 		if (trajanje == 0)
@@ -322,12 +329,33 @@ bool Korisnik::provjeraKljuca(int igra)
 		default:
 			std::cout << u8"========================================================\nGreška u unosu trajanja kljuèa!\n========================================================" << std::endl;
 		}
-		time_t sad,uneseno;
+		time_t sad, uneseno;
 		unos >> uneseno;
 		time(&sad);
-		if (difftime(sad,uneseno) < sek)
+		if (difftime(sad, uneseno) < sek)
 			return true;
 		unos.close();
+		std::ofstream izlaz;
+		switch (igra)
+		{
+		case 1:
+			izlaz.open("trajanjePrvaIgra.txt");
+			break;
+		case 2:
+			izlaz.open("trajanjeDrugaIgra.txt");
+			break;
+		case 3:
+			izlaz.open("trajanjeTrecaIgra.txt");
+			break;
+		case 4:
+			izlaz.open("trajanjeCetvrtaIgra.txt");
+			break;
+		}
+		int b = -1;
+		izlaz.seekp(0, std::ios::beg);
+		izlaz << b << std::endl;
+		izlaz << '0';
+		izlaz.close();
 		return false;
 	}
 }
